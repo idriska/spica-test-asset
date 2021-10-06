@@ -1,0 +1,134 @@
+# BUCKET - ASSET FOUR
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: asset-four-4
+spec:
+  title: ASSET FOUR
+  description: Describe your new bucket
+  icon: view_stream
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      description: Title of the row
+      options:
+        position: left
+  acl:
+    write: true==true
+    read: true==true
+  order: 3
+---
+# BUCKET - ASSET THREE
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: asset-three-3
+spec:
+  title: ASSET THREE
+  description: Describe your new bucket
+  icon: view_stream
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      description: Title of the row
+      options:
+        position: left
+    relation_three:
+      type: relation
+      description: Description of the relation_three input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: asset-four-4
+  acl:
+    write: true==true
+    read: true==true
+  order: 2
+---
+# BUCKET - ASSET FOUR
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: asset-four-4
+spec:
+  title: ASSET FOUR
+  description: Describe your new bucket
+  icon: view_stream
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      description: Title of the row
+      options:
+        position: left
+  acl:
+    write: true==true
+    read: true==true
+  order: 3
+---
+# BUCKET - ASSET ONE
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: asset-one-1
+spec:
+  title: ASSET ONE
+  description: Describe your new bucket
+  icon: view_stream
+  primary: title_1
+  readOnly: false
+  history: false
+  properties:
+    title_1:
+      type: string
+      description: Description of the title_1 input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 0
+---
+# BUCKET - ASSET TWO
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: asset-two-2
+spec:
+  title: ASSET TWO
+  description: Describe your new bucket
+  icon: view_stream
+  primary: title_2
+  readOnly: false
+  history: false
+  properties:
+    title_2:
+      type: string
+      description: Description of the title_2 input
+      options:
+        position: bottom
+    relation_two:
+      type: relation
+      description: Description of the relation_two input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: asset-one-1
+  acl:
+    write: true==true
+    read: true==true
+  order: 1
