@@ -67,6 +67,15 @@ spec:
         title: Title of the items
         type: object
         properties:
+          relation_one:
+            type: relation
+            title: relation_one
+            description: Description of the relation_one input
+            options:
+              position: bottom
+            relationType: onetoone
+            bucketId: 615d7f841a1b5d002d812e53
+            dependent: false
           name:
             type: string
             title: name
