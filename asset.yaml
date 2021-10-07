@@ -10,7 +10,29 @@ spec:
   primary: title_1
   readOnly: false
   history: false
-  properties: {}
+  properties:
+    title_1:
+      type: string
+      title: title_1
+      description: Description of the title_1 input
+      options:
+        position: bottom
+    arr:
+      type: array
+      title: arr
+      description: Description of the arr input
+      options:
+        position: bottom
+      items:
+        title: Title of the items
+        type: object
+        properties:
+          name:
+            type: string
+            title: name
+            description: Description of the name input
+            options:
+              position: bottom
   acl:
     write: true==true
     read: true==true
@@ -28,7 +50,29 @@ spec:
   primary: title_1
   readOnly: false
   history: false
-  properties: {}
+  properties:
+    title_1:
+      type: string
+      title: title_1
+      description: Description of the title_1 input
+      options:
+        position: bottom
+    arr:
+      type: array
+      title: arr
+      description: Description of the arr input
+      options:
+        position: bottom
+      items:
+        title: Title of the items
+        type: object
+        properties:
+          name:
+            type: string
+            title: name
+            description: Description of the name input
+            options:
+              position: bottom
   acl:
     write: true==true
     read: true==true
