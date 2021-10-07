@@ -2960,6 +2960,208 @@ spec:
     name: Node
     language: Javascript
 ---
+# FUNCTION - Taxi Summary Rating
+apiVersion: function/v1
+kind: Function
+metadata:
+  name: taxi-summary-rating-2
+spec:
+  description: Taxi summary rating
+  language: javascript
+  timeout: 60
+  environment:
+    - name: TAXI_RATING_BUCKET
+      value: 5fe5d834dfdd0f002c91f319
+    - name: SECRET_API_KEY
+      value: 5ks9718kiybw51i
+  dependency:
+    - name: "@spica-devkit/bucket"
+      version: ^0.9.7
+      types:
+        node_modules/@spica-devkit/bucket/dist/index.d.ts: |
+          /// <amd-module name="@spica-devkit/bucket" />
+          export * from "./src/index";
+        node_modules/@spica-devkit/bucket/dist/src/bucket.d.ts: >
+          /// <amd-module name="@spica-devkit/bucket/src/bucket" />
+
+          import { Bucket, BucketDocument, ApikeyInitialization, IdentityInitialization, IndexResult } from "@spica-devkit/bucket";
+
+          export declare function initialize(options: ApikeyInitialization | IdentityInitialization): void;
+
+          export declare function get(id: string): Promise<Bucket>;
+
+          export declare function getAll(): Promise<Bucket[]>;
+
+          export declare function insert(bucket: Bucket): Promise<Bucket>;
+
+          export declare function update(id: string, bucket: Bucket): Promise<Bucket>;
+
+          export declare function remove(id: string): Promise<any>;
+
+          export declare namespace data {
+              function get<T>(bucketId: string, documentId: string, options?: {
+                  headers?: object;
+                  queryParams?: object;
+              }): Promise<T>;
+              function getAll<T>(bucketId: string, options?: {
+                  headers?: object;
+                  queryParams?: {
+                      [key: string]: any;
+                      paginate?: false;
+                  };
+              }): Promise<T[]>;
+              function getAll<T>(bucketId: string, options?: {
+                  headers?: object;
+                  queryParams?: {
+                      [key: string]: any;
+                      paginate?: true;
+                  };
+              }): Promise<IndexResult<T>>;
+              function insert(bucketId: string, document: BucketDocument): Promise<BucketDocument>;
+              function update(bucketId: string, documentId: string, document: BucketDocument): Promise<BucketDocument>;
+              function patch(bucketId: string, documentId: string, document: Partial<BucketDocument>): Promise<any>;
+              function remove(bucketId: string, documentId: string): Promise<any>;
+              namespace realtime {
+                  function get<T>(bucketId: string, documentId: string, messageCallback?: (res: {
+                      status: number;
+                      message: string;
+                  }) => any): import("@spica-devkit/bucket").RealtimeConnection<T>;
+                  function getAll<T>(bucketId: string, queryParams?: object, messageCallback?: (res: {
+                      status: number;
+                      message: string;
+                  }) => any): import("@spica-devkit/bucket").RealtimeConnection<T[]>;
+              }
+          }
+        node_modules/@spica-devkit/bucket/dist/src/index.d.ts: |
+          /// <amd-module name="@spica-devkit/bucket/src/index" />
+          export * from "./bucket";
+          export * from "./interface";
+        node_modules/@spica-devkit/bucket/dist/src/interface.d.ts: |
+          /// <amd-module name="@spica-devkit/bucket/src/interface" />
+          import { JSONSchema7, JSONSchema7TypeName } from "json-schema";
+          import { Observable } from "rxjs";
+          export interface Bucket {
+              _id?: string;
+              title: string;
+              icon?: string;
+              description: string;
+              primary: string;
+              history?: boolean;
+              properties: {
+                  [key: string]: JSONSchema7 & PropertyOptions;
+              };
+              order?: number;
+          }
+          interface PropertyOptions {
+              type: JSONSchema7TypeName | JSONSchema7TypeName[] | string;
+              options: {
+                  translate?: boolean;
+                  history?: boolean;
+                  position: "left" | "right" | "bottom";
+              };
+          }
+          export interface BucketDocument {
+              _id?: string;
+              [key: string]: any | undefined;
+          }
+          export interface Sequence {
+              kind: SequenceKind;
+              item: string;
+              at: number;
+              with?: string;
+          }
+          export declare enum SequenceKind {
+              Delete = 0,
+              Substitute = 1,
+              Insert = 2
+          }
+          export interface StreamChunk<T = any> {
+              kind: ChunkKind;
+              document?: T;
+              sequence?: Sequence[];
+          }
+          export declare enum ChunkKind {
+              Error = -1,
+              Initial = 0,
+              EndOfInitial = 1,
+              Insert = 2,
+              Delete = 3,
+              Expunge = 4,
+              Update = 5,
+              Replace = 6,
+              Order = 7,
+              Response = 8
+          }
+          export declare enum OperationKind {
+              INSERT = "insert",
+              REPLACE = "replace",
+              PATCH = "patch",
+              DELETE = "delete"
+          }
+          interface InitializeOptions {
+              publicUrl?: string;
+          }
+          export interface ApikeyInitialization extends InitializeOptions {
+              apikey: string;
+          }
+          export interface IdentityInitialization extends InitializeOptions {
+              identity: string;
+          }
+          export interface InitializationResult {
+              authorization: string;
+              publicUrl: string;
+          }
+          export interface IndexResult<T> {
+              meta: {
+                  total: number;
+              };
+              data: T[];
+          }
+          export declare type RealtimeConnection<T> = Observable<T> & {
+              insert: (document: Singular<T>) => void;
+              replace: (document: Singular<T> & {
+                  _id: string;
+              }) => void;
+              patch: (document: Partial<Singular<T>> & {
+                  _id: string;
+              }) => void;
+              remove: (document: Partial<Singular<T>> & {
+                  _id: string;
+              }) => void;
+          };
+          declare type Singular<T> = T extends Array<any> ? T[0] : T;
+          export {};
+        node_modules/@spica-devkit/bucket/dist/src/operators.d.ts: >
+          /// <amd-module name="@spica-devkit/bucket/src/operators" />
+
+          import { Sequence } from "@spica-devkit/bucket";
+
+          import { RealtimeConnection } from "./interface";
+
+          export declare class IterableSet<T> implements Iterable<T> {
+              ids: string[];
+              dataset: Map<string, T>;
+              order(sequences: Sequence[]): void;
+              set(id: string, value: any): void;
+              delete(id: string, index?: number): void;
+              [Symbol.iterator](): Iterator<T, any, undefined>;
+          }
+
+          export declare function getWsObs<T>(url: string, sort?: object, findOne?: true, messageCallback?: (res: {
+              status: number;
+              message: string;
+          }) => any): RealtimeConnection<T>;
+
+          export declare function getWsObs<T>(url: string, sort?: object, findOne?: false, messageCallback?: (res: {
+              status: number;
+              message: string;
+          }) => any): RealtimeConnection<T[]>;
+  title: Taxi Summary Rating
+  code: ./function/taxi-summary-rating-2.js
+  runtime:
+    name: Node
+    language: Javascript
+---
 # TRIGGER - rideAccept
 apiVersion: function/v1
 kind: Trigger
@@ -2997,3 +3199,17 @@ spec:
       resourceFieldRef:
         schemaName: taxi-ride-29
     type: UPDATE
+---
+# TRIGGER - summaryRating
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: summaryRating
+spec:
+  type: http
+  active: true
+  name: summaryRating
+  func: taxi-summary-rating-2
+  httpOptions:
+    method: Get
+    path: /summary_rating
