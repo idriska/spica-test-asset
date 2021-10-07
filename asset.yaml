@@ -75,6 +75,9 @@ spec:
               position: bottom
             relationType: onetoone
             dependent: false
+            bucket:
+              resourceFieldRef:
+                schemaName: asset-three-3
           name:
             type: string
             title: name
