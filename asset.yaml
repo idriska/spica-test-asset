@@ -77,7 +77,7 @@ spec:
             dependent: false
             bucket:
               resourceFieldRef:
-                schemaName: asset-three-3
+                schemaName: asset-one-1
           name:
             type: string
             title: name
