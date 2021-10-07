@@ -1,1188 +1,242 @@
-# BUCKET - Spotify-User
+# BUCKET - ASSET ONE
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: spotify-user-1
+  name: asset-one-1
 spec:
-  title: Spotify-User
+  title: ASSET ONE
   description: Describe your new bucket
-  icon: contactless
-  primary: username
+  icon: view_stream
+  primary: title_1
   readOnly: false
   history: false
   properties:
-    username:
+    title_1:
       type: string
-      title: username
-      description: Description of the username input
+      title: title_1
+      description: Description of the title_1 input
       options:
         position: bottom
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    surname:
-      type: string
-      title: surname
-      description: Description of the surname input
-      options:
-        position: bottom
-    identity_id:
-      type: string
-      title: identity_id
-      description: Description of the identity_id input
-      options:
-        position: bottom
-    mail:
-      type: string
-      title: mail
-      description: Description of the mail input
-      options:
-        position: bottom
-    bio:
-      type: textarea
-      title: bio
-      description: Description of the bio input
-      options:
-        position: bottom
-    birthday:
-      type: date
-      title: birthday
-      description: Description of the birthday input
-      options:
-        position: bottom
-    gender:
-      type: string
-      title: gender
-      description: Description of the gender input
-      options:
-        position: bottom
-      enum:
-        - Male
-        - Female
-        - other
-    langue:
-      type: string
-      title: language
-      description: Description of the langue input
-      options:
-        position: bottom
-      enum:
-        - English
-        - Türkçe
-        - Français
-        - Español
-        - Deutsch
-    profile_picture:
-      type: storage
-      title: profile_picture
-      description: Description of the profile_picture input
-      options:
-        position: bottom
-    isverified:
-      type: boolean
-      title: isverified
-      description: Description of the isverified input
-      options:
-        position: bottom
-      default: false
-  acl:
-    write: auth._id == document.identity_id || auth.identifier == "spica"
-    read: true==true
-  order: 9
----
-# BUCKET - Spotify-Singer
-apiVersion: bucket/v1
-kind: Schema
-metadata:
-  name: spotify-singer-2
-spec:
-  title: Spotify-Singer
-  description: Describe your new bucket
-  icon: contactless
-  primary: name
-  readOnly: false
-  history: false
-  properties:
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    surname:
-      type: string
-      title: surname
-      description: Description of the surname input
-      options:
-        position: bottom
-    identity_id:
-      type: string
-      title: identity_id
-      description: Description of the identity_id input
-      options:
-        position: bottom
-    profile_pictures:
+    arr:
       type: array
-      title: profile_pictures
-      description: Description of the profile_pictures input
+      title: arr
+      description: Description of the arr input
       options:
         position: bottom
       items:
         title: Title of the items
-        type: storage
-    birthday:
-      type: date
-      title: birthday
-      description: Description of the birthday input
-      options:
-        position: bottom
-    bio:
-      type: textarea
-      title: bio
-      description: Description of the bio input
-      options:
-        position: bottom
-    isverified:
-      type: boolean
-      title: isverified
-      description: Description of the isverified input
-      options:
-        position: bottom
-      default: false
-    popularity:
-      type: number
-      title: popularity
-      description: Description of the popularity input
-      options:
-        position: bottom
-      minimum: 0
-      maximum: 100
+        type: object
+        properties:
+          name:
+            type: string
+            title: name
+            description: Description of the name input
+            options:
+              position: bottom
   acl:
-    write: auth._id == document.identity_id || auth.identifier == "spica"
+    write: true==true
     read: true==true
-  order: 10
+  order: 0
 ---
-# BUCKET - Spotify-Music
+# BUCKET - ASSET TWO
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: spotify-music-3
+  name: asset-two-2
 spec:
-  title: Spotify-Music
+  title: ASSET TWO
   description: Describe your new bucket
-  icon: contactless
-  primary: name
+  icon: view_stream
+  primary: title_2
   readOnly: false
   history: false
   properties:
-    name:
+    title_2:
       type: string
-      title: name
-      description: Description of the name input
+      title: title_2
+      description: Description of the title_2 input
       options:
         position: bottom
-    description:
-      type: textarea
-      title: description
-      description: Description of the description input
-      options:
-        position: bottom
-    createdat:
-      type: date
-      title: created_at
-      description: Description of the createdat input
-      options:
-        position: bottom
-      default: :created_at
-    cover:
-      type: storage
-      title: cover
-      description: Description of the cover input
-      options:
-        position: bottom
-    sourc:
-      type: storage
-      title: source
-      description: Description of the sourc input
-      options:
-        position: bottom
-    clip:
-      type: storage
-      title: clip
-      description: Description of the clip input
-      options:
-        position: bottom
-    listened_count:
-      type: number
-      title: listened_count
-      description: Description of the listened_count input
-      options:
-        position: bottom
-      minimum: 0
-    features:
+    obj:
       type: object
-      title: features
-      description: Description of the Features input
+      title: obj
+      description: Description of the obj input
       options:
         position: bottom
-      properties:
-        danceability:
-          type: number
-          title: danceability
-          description: Description of the danceability input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        loudness:
-          type: number
-          title: loudness
-          description: Description of the loudness input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        speechiness:
-          type: number
-          title: speechiness
-          description: Description of the speechiness input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        energy:
-          type: number
-          title: energy
-          description: Description of the energy input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        tempo:
-          type: number
-          title: tempo
-          description: Description of the tempo input
-          options:
-            position: bottom
-          maximum: 100
-          minimum: 0
-        duration:
-          type: number
-          title: duration
-          description: Description of the duration input
-          options:
-            position: bottom
-          minimum: 0
-        popularity:
-          type: number
-          title: popularity
-          description: Description of the popularity input
-          options:
-            position: bottom
-          maximum: 100
-          minimum: 0
-        kind:
-          type: multiselect
-          title: kind
-          description: Description of the kind input
-          options:
-            position: bottom
-          items:
-            type: string
-            enum:
-              - Rap
-              - Caz
-              - Classic
-              - Hiphop
-              - Pop
-              - Rock
-        available_country:
-          type: multiselect
-          title: available_country
-          description: Description of the available_country input
-          options:
-            position: bottom
-          items:
-            type: string
-            enum:
-              - English
-              - Türkçe
-              - Français
-              - Español
-              - Deutsch
-        explicit:
-          type: boolean
-          title: explicit
-          description: Description of the explicit input
-          options:
-            position: bottom
-          default: false
-        language:
-          type: string
-          title: language
-          description: Description of the language input
-          options:
-            position: bottom
-          enum:
-            - English
-            - Türkçe
-            - Français
-            - Español
-            - Deutsch
-      readOnly: false
+      properties: {}
   acl:
-    write: auth._id == document.singer.identity_id || auth._id ==
-      document.user.identity_id
-    read: true == true
-  order: 11
-  required: []
----
-# BUCKET - Spotify-Album
-apiVersion: bucket/v1
-kind: Schema
-metadata:
-  name: spotify-album-4
-spec:
-  title: Spotify-Album
-  description: Describe your new bucket
-  icon: contactless
-  primary: name
-  readOnly: false
-  history: false
-  properties:
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    cover:
-      type: storage
-      title: cover
-      description: Description of the cover input
-      options:
-        position: bottom
-    created_at:
-      type: date
-      title: created_at
-      description: Description of the created_at input
-      options:
-        position: bottom
-      default: :created_at
-    popularity:
-      type: number
-      title: popularity
-      description: Description of the popularity input
-      options:
-        position: bottom
-      minimum: 0
-      maximum: 100
-  acl:
-    write: auth._id == document.singer.identity_id || auth._id ==
-      document.user.identity_id
+    write: true==true
     read: true==true
-  order: 12
+  order: 1
 ---
-# BUCKET - Spotify-Playlist
+# BUCKET - ASSET ONE
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: spotify-playlist-5
+  name: asset-one-1
 spec:
-  title: Spotify-Playlist
+  title: ASSET ONE
   description: Describe your new bucket
-  icon: contactless
-  primary: name
+  icon: view_stream
+  primary: title_1
   readOnly: false
   history: false
   properties:
-    name:
+    title_1:
       type: string
-      title: name
-      description: Description of the name input
+      title: title_1
+      description: Description of the title_1 input
       options:
         position: bottom
-    image:
-      type: storage
-      title: image
-      description: Description of the image input
-      options:
-        position: bottom
-    created_at:
-      type: date
-      title: created_at
-      description: Description of the created_at input
-      options:
-        position: bottom
-      default: :created_at
-    popularity:
-      type: number
-      title: popularity
-      description: Description of the popularity input
-      options:
-        position: bottom
-      minimum: 0
-      maximum: 100
-    private:
-      type: boolean
-      title: private
-      description: Description of the private input
-      options:
-        position: bottom
-      default: false
-  acl:
-    write: auth._id == document.owner.identity_id ||
-      some(document.admins.identity_id, [auth._id])
-    read: "!private || some(document.admins.identity_id, [auth._id])"
-  order: 13
----
-# BUCKET - Spotify-User
-apiVersion: bucket/v1
-kind: Schema
-metadata:
-  name: spotify-user-1
-spec:
-  title: Spotify-User
-  description: Describe your new bucket
-  icon: contactless
-  primary: username
-  readOnly: false
-  history: false
-  properties:
-    username:
-      type: string
-      title: username
-      description: Description of the username input
-      options:
-        position: bottom
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    surname:
-      type: string
-      title: surname
-      description: Description of the surname input
-      options:
-        position: bottom
-    identity_id:
-      type: string
-      title: identity_id
-      description: Description of the identity_id input
-      options:
-        position: bottom
-    mail:
-      type: string
-      title: mail
-      description: Description of the mail input
-      options:
-        position: bottom
-    bio:
-      type: textarea
-      title: bio
-      description: Description of the bio input
-      options:
-        position: bottom
-    birthday:
-      type: date
-      title: birthday
-      description: Description of the birthday input
-      options:
-        position: bottom
-    gender:
-      type: string
-      title: gender
-      description: Description of the gender input
-      options:
-        position: bottom
-      enum:
-        - Male
-        - Female
-        - other
-    langue:
-      type: string
-      title: language
-      description: Description of the langue input
-      options:
-        position: bottom
-      enum:
-        - English
-        - Türkçe
-        - Français
-        - Español
-        - Deutsch
-    profile_picture:
-      type: storage
-      title: profile_picture
-      description: Description of the profile_picture input
-      options:
-        position: bottom
-    isverified:
-      type: boolean
-      title: isverified
-      description: Description of the isverified input
-      options:
-        position: bottom
-      default: false
-    followeds:
-      type: relation
-      title: followed_singers
-      description: Description of the followeds input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-singer-11
-    friends:
-      type: relation
-      title: friends
-      description: Description of the friends input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: username
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    uploaded_music:
-      type: relation
-      title: uploaded_musics
-      description: Description of the uploaded_music input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    uploaded_albums:
-      type: relation
-      title: uploaded_albums
-      description: Description of the uploaded_albums input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-album-13
-    playlist:
-      type: relation
-      title: uploaded_playlists
-      description: Description of the playlist input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-playlist-14
-    last_listened:
-      type: relation
-      title: last_listeneds
-      description: Description of the last_listened input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    currently_playing:
-      type: relation
-      title: currently_playing
-      description: Description of the currently_playing input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    playlist_admin:
-      type: relation
-      title: playlist_admin
-      description: Description of the playlist_admin input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-playlist-14
-    liked_musics:
-      type: relation
-      title: liked_musics
-      description: Description of the liked_musics input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    liked_albums:
-      type: relation
-      title: liked_albums
-      description: Description of the liked_albums input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-album-13
-    liked_playlists:
-      type: relation
-      title: liked_playlists
-      description: Description of the liked_playlists input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-playlist-14
-  acl:
-    write: auth._id == document.identity_id || auth.identifier == "spica"
-    read: true==true
-  order: 9
----
-# BUCKET - Spotify-Singer
-apiVersion: bucket/v1
-kind: Schema
-metadata:
-  name: spotify-singer-2
-spec:
-  title: Spotify-Singer
-  description: Describe your new bucket
-  icon: contactless
-  primary: name
-  readOnly: false
-  history: false
-  properties:
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    surname:
-      type: string
-      title: surname
-      description: Description of the surname input
-      options:
-        position: bottom
-    identity_id:
-      type: string
-      title: identity_id
-      description: Description of the identity_id input
-      options:
-        position: bottom
-    profile_pictures:
+    arr:
       type: array
-      title: profile_pictures
-      description: Description of the profile_pictures input
+      title: arr
+      description: Description of the arr input
       options:
         position: bottom
       items:
         title: Title of the items
-        type: storage
-    birthday:
-      type: date
-      title: birthday
-      description: Description of the birthday input
-      options:
-        position: bottom
-    bio:
-      type: textarea
-      title: bio
-      description: Description of the bio input
-      options:
-        position: bottom
-    isverified:
-      type: boolean
-      title: isverified
-      description: Description of the isverified input
-      options:
-        position: bottom
-      default: false
-    uploaded_musics:
-      type: relation
-      title: uploaded_musics
-      description: Description of the uploaded_musics input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    uploaded_albums:
-      type: relation
-      title: uploaded_albums
-      description: Description of the uploaded_albums input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-album-13
-    followers:
-      type: relation
-      title: followers
-      description: Description of the followers input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: username
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    popularity:
-      type: number
-      title: popularity
-      description: Description of the popularity input
-      options:
-        position: bottom
-      minimum: 0
-      maximum: 100
+        type: object
+        properties:
+          relation_one:
+            type: relation
+            title: relation_one
+            description: Description of the relation_one input
+            options:
+              position: bottom
+            relationType: onetoone
+            dependent: false
+            bucket:
+              resourceFieldRef:
+                schemaName: asset-one
+          name:
+            type: string
+            title: name
+            description: Description of the name input
+            options:
+              position: bottom
   acl:
-    write: auth._id == document.identity_id || auth.identifier == "spica"
+    write: true==true
     read: true==true
-  order: 10
+  order: 0
 ---
-# BUCKET - Spotify-Music
+# BUCKET - ASSET TWO
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: spotify-music-3
+  name: asset-two-2
 spec:
-  title: Spotify-Music
+  title: ASSET TWO
   description: Describe your new bucket
-  icon: contactless
-  primary: name
+  icon: view_stream
+  primary: title_2
   readOnly: false
   history: false
   properties:
-    name:
+    title_2:
       type: string
-      title: name
-      description: Description of the name input
+      title: title_2
+      description: Description of the title_2 input
       options:
         position: bottom
-    description:
-      type: textarea
-      title: description
-      description: Description of the description input
-      options:
-        position: bottom
-    createdat:
-      type: date
-      title: created_at
-      description: Description of the createdat input
-      options:
-        position: bottom
-      default: :created_at
-    cover:
-      type: storage
-      title: cover
-      description: Description of the cover input
-      options:
-        position: bottom
-    sourc:
-      type: storage
-      title: source
-      description: Description of the sourc input
-      options:
-        position: bottom
-    clip:
-      type: storage
-      title: clip
-      description: Description of the clip input
-      options:
-        position: bottom
-    singer:
-      type: relation
-      title: singer
-      description: Description of the singer input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-singer-11
-    user:
-      type: relation
-      title: user
-      description: Description of the user input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      primary: username
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    album:
-      type: relation
-      title: album
-      description: Description of the album input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-album-13
-    like:
-      type: relation
-      title: likes
-      description: Description of the like input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: username
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    listened_count:
-      type: number
-      title: listened_count
-      description: Description of the listened_count input
-      options:
-        position: bottom
-      minimum: 0
-    features:
+    obj:
       type: object
-      title: features
-      description: Description of the Features input
+      title: obj
+      description: Description of the obj input
       options:
         position: bottom
       properties:
-        danceability:
-          type: number
-          title: danceability
-          description: Description of the danceability input
+        relation_two:
+          type: relation
+          title: relation_two
+          description: Description of the relation_two input
           options:
             position: bottom
-          minimum: 0
-          maximum: 100
-        loudness:
-          type: number
-          title: loudness
-          description: Description of the loudness input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        speechiness:
-          type: number
-          title: speechiness
-          description: Description of the speechiness input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        energy:
-          type: number
-          title: energy
-          description: Description of the energy input
-          options:
-            position: bottom
-          minimum: 0
-          maximum: 100
-        tempo:
-          type: number
-          title: tempo
-          description: Description of the tempo input
-          options:
-            position: bottom
-          maximum: 100
-          minimum: 0
-        duration:
-          type: number
-          title: duration
-          description: Description of the duration input
-          options:
-            position: bottom
-          minimum: 0
-        popularity:
-          type: number
-          title: popularity
-          description: Description of the popularity input
-          options:
-            position: bottom
-          maximum: 100
-          minimum: 0
-        kind:
-          type: multiselect
-          title: kind
-          description: Description of the kind input
-          options:
-            position: bottom
-          items:
-            type: string
-            enum:
-              - Rap
-              - Caz
-              - Classic
-              - Hiphop
-              - Pop
-              - Rock
-        available_country:
-          type: multiselect
-          title: available_country
-          description: Description of the available_country input
-          options:
-            position: bottom
-          items:
-            type: string
-            enum:
-              - English
-              - Türkçe
-              - Français
-              - Español
-              - Deutsch
-        explicit:
-          type: boolean
-          title: explicit
-          description: Description of the explicit input
-          options:
-            position: bottom
-          default: false
-        language:
-          type: string
-          title: language
-          description: Description of the language input
-          options:
-            position: bottom
-          enum:
-            - English
-            - Türkçe
-            - Français
-            - Español
-            - Deutsch
-      readOnly: false
+          relationType: onetoone
+          dependent: false
+          bucket:
+            resourceFieldRef:
+              schemaName: asset-three
   acl:
-    write: auth._id == document.singer.identity_id || auth._id ==
-      document.user.identity_id
-    read: true == true
-  order: 11
-  required: []
----
-# BUCKET - Spotify-Album
-apiVersion: bucket/v1
-kind: Schema
-metadata:
-  name: spotify-album-4
-spec:
-  title: Spotify-Album
-  description: Describe your new bucket
-  icon: contactless
-  primary: name
-  readOnly: false
-  history: false
-  properties:
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    cover:
-      type: storage
-      title: cover
-      description: Description of the cover input
-      options:
-        position: bottom
-    musics:
-      type: relation
-      title: musics
-      description: Description of the Musics input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    created_at:
-      type: date
-      title: created_at
-      description: Description of the created_at input
-      options:
-        position: bottom
-      default: :created_at
-    like:
-      type: relation
-      title: likes
-      description: Description of the like input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: username
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    popularity:
-      type: number
-      title: popularity
-      description: Description of the popularity input
-      options:
-        position: bottom
-      minimum: 0
-      maximum: 100
-    singer:
-      type: relation
-      title: singer
-      description: Description of the singer input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-singer-11
-    user:
-      type: relation
-      title: user
-      description: Description of the user input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-  acl:
-    write: auth._id == document.singer.identity_id || auth._id ==
-      document.user.identity_id
+    write: true==true
     read: true==true
-  order: 12
+  order: 1
 ---
-# BUCKET - Spotify-Playlist
-apiVersion: bucket/v1
-kind: Schema
+# FUNCTION - Taxi Ride Accept
+apiVersion: function/v1
+kind: Function
 metadata:
-  name: spotify-playlist-5
+  name: taxi-ride-accept
 spec:
-  title: Spotify-Playlist
-  description: Describe your new bucket
-  icon: contactless
-  primary: name
-  readOnly: false
-  history: false
-  properties:
-    name:
-      type: string
-      title: name
-      description: Description of the name input
-      options:
-        position: bottom
-    image:
-      type: storage
-      title: image
-      description: Description of the image input
-      options:
-        position: bottom
-    musics:
-      type: relation
-      title: musics
-      description: Description of the musics input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      primary: name
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-music-12
-    created_at:
-      type: date
-      title: created_at
-      description: Description of the created_at input
-      options:
-        position: bottom
-      default: :created_at
-    popularity:
-      type: number
-      title: popularity
-      description: Description of the popularity input
-      options:
-        position: bottom
-      minimum: 0
-      maximum: 100
-    owner:
-      type: relation
-      title: owner
-      description: Description of the owner input
-      options:
-        position: bottom
-      relationType: onetoone
-      dependent: false
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    admins:
-      type: relation
-      title: admins
-      description: Description of the admins input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    likes:
-      type: relation
-      title: likes
-      description: Description of the likes input
-      options:
-        position: bottom
-      relationType: onetomany
-      dependent: false
-      bucket:
-        resourceFieldRef:
-          schemaName: spotify-user-10
-    private:
-      type: boolean
-      title: private
-      description: Description of the private input
-      options:
-        position: bottom
-      default: false
-  acl:
-    write: auth._id == document.owner.identity_id ||
-      some(document.admins.identity_id, [auth._id])
-    read: "!private || some(document.admins.identity_id, [auth._id])"
-  order: 13
+  description: Seto ride accept
+  language: javascript
+  timeout: 50
+  environment:
+    - name: STRIPE_PAYMENT_METHOD_ID
+      value: 5fe44ef6dfdd0f002c91efd7
+    - name: STRIPE_PAYMENT_BUCKET
+      value: 60953e7ba55024002c751a53
+    - name: STRIPE_CUSTOMER_BUCKET
+      value: 60953e73a55024002c751a4e
+    - name: STRIPE_CARD_BUCKET
+      value: 60953e75a55024002c751a4f
+    - name: SECRET_API_KEY
+      value: 5ks9718kiybw51i
+    - name: TAXI_RIDE_BUCKET
+      value: 5fe44b3bdfdd0f002c91efc9
+    - name: GOOGLE_MAP_API_KEY
+      value: AIzaSyDem6KpKY6-1Y68c1o3r-paNJPGIujpeik
+    - name: TAXI_COUPON_USER_BUCKET
+      value: 601d2fc51f7cc7002cebe5cc
+    - name: TAXI_COUPON_BUCKET
+      value: 5fe5af73dfdd0f002c91f2da
+  dependency:
+    - name: "@spica-devkit/bucket"
+      version: ^0.8.8
+    - name: fast-json-patch
+      version: ^3.0.0-1
+    - name: node-fetch
+      version: ^2.6.1
+  title: Taxi Ride Accept
+  code: ./function/taxi-ride-accept.js
+  runtime:
+    name: Node
+    language: Javascript
+---
+# TRIGGER - rideAccept
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: rideAccept
+spec:
+  type: bucket
+  active: true
+  batch:
+    deadline: 45
+    limit: 9007199254740991
+  name: rideAccept
+  func: taxi-ride-accept
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: taxi-ride-request
+    type: UPDATE
+---
+# TRIGGER - rideUpdate
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: rideUpdate
+spec:
+  type: bucket
+  active: true
+  batch:
+    deadline: 45
+    limit: 9007199254740991
+  name: rideUpdate
+  func: taxi-ride-accept
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: taxi-ride
+    type: UPDATE
