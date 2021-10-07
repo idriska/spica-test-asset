@@ -2,7 +2,7 @@
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: asset-one-1
+  name: asset-one
 spec:
   title: ASSET ONE
   description: Describe your new bucket
@@ -42,7 +42,7 @@ spec:
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: asset-two-2
+  name: asset-two
 spec:
   title: ASSET TWO
   description: Describe your new bucket
@@ -73,7 +73,7 @@ spec:
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: asset-one-1
+  name: asset-one
 spec:
   title: ASSET ONE
   description: Describe your new bucket
@@ -124,7 +124,7 @@ spec:
 apiVersion: bucket/v1
 kind: Schema
 metadata:
-  name: asset-two-2
+  name: asset-two
 spec:
   title: ASSET TWO
   description: Describe your new bucket
