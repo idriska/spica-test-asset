@@ -1,0 +1,3229 @@
+# BUCKET - STRIPE-Card
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-card
+spec:
+  title: STRIPE-Card
+  description: STRIPE-Card of customers
+  required:
+    - customer
+    - token
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    card_id:
+      type: string
+      description: DONT TOUCH, IT WILL BE FILLED AUTOMATICALLY
+      options:
+        position: bottom
+      title: card_id
+    status:
+      type: string
+      description: DONT TOUCH, IT WILL BE FILLED AUTOMATICALLY
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    token:
+      type: string
+      description: token of the card
+      options:
+        position: bottom
+      title: token
+  icon: outbond
+  primary: token
+  order: 7
+---
+# BUCKET - STRIPE-Payment Method
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-payment-method
+spec:
+  title: STRIPE-Payment Method
+  description: STRIPE-Payment Method description
+  required:
+    - payment_method_id
+    - customer
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    payment_method_id:
+      type: string
+      description: WRITE PAYMENT METHOD ID OF THIS CUSTOMER
+      options:
+        position: bottom
+      title: payment_method_id
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE CHANGED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    default:
+      type: boolean
+      default: false
+      description: SELECT THIS IF YOU WANT THIS PAYMENT METHOD TO BE DEFAULT FOR THIS
+        CUSTOMER.
+      options:
+        position: bottom
+      title: default
+  icon: outbond
+  primary: default
+  order: 8
+---
+# BUCKET - STRIPE-Plan
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-plan
+spec:
+  title: STRIPE-Plan
+  description: STRIPE-Plan description
+  required:
+    - currency
+    - interval
+    - product
+    - amount
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    interval:
+      type: string
+      default: month
+      description: PAYING INTERVAL
+      enum:
+        - day
+        - week
+        - month
+        - year
+      options:
+        position: bottom
+      title: interval
+    amount:
+      type: number
+      description: AMOUNT OF MONEY
+      options:
+        position: bottom
+      title: amount
+    currency:
+      type: string
+      description: CURRENCY OF MONEY
+      default: usd
+      options:
+        position: bottom
+      title: currency
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE CHANGED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    price_id:
+      type: string
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY!
+      options:
+        position: bottom
+      title: price_id
+  icon: outbond
+  primary: price_id
+  order: 10
+---
+# BUCKET - STRIPE-Payment
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-payment
+spec:
+  title: STRIPE-Payment
+  description: STRIPE-Payment description
+  required:
+    - payment_type
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    payment_type:
+      type: string
+      description: SELECT PAYMENT TYPE
+      enum:
+        - subscribe
+        - invoice
+        - charge
+      options:
+        position: bottom
+      title: payment_type
+    token:
+      type: string
+      description: FILL WHEN - CHARGE -
+      options:
+        position: bottom
+      title: token
+    price:
+      type: number
+      description: FILL WHEN - CHARGE -
+      options:
+        position: bottom
+      title: price
+    currency:
+      type: string
+      description: SELECT WHEN - CHARGE -
+      default: usd
+      options:
+        position: bottom
+      title: currency
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    subscribe_id:
+      type: string
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY WHEN SUBSCRIBING.
+      options:
+        position: bottom
+      title: subscribe_id
+  icon: outbond
+  primary: subscribe_id
+  order: 11
+---
+# BUCKET - Taxi User
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-user
+spec:
+  title: Taxi User
+  description: Describe your new bucket
+  icon: directions_car
+  primary: email
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Description of the name input
+      options:
+        position: bottom
+    email:
+      type: string
+      title: email
+      description: Description of the email input
+      options:
+        position: bottom
+    password:
+      type: string
+      title: password
+      description: Description of the password input
+      options:
+        position: bottom
+    image:
+      type: storage
+      title: image
+      description: Description of the image input
+      options:
+        position: bottom
+    mobile_number:
+      type: string
+      title: mobile_number
+      description: Description of the mobile_number input
+      options:
+        position: bottom
+    mobile_verified:
+      type: number
+      title: mobile_verified
+      description: Description of the mobile_verified input
+      options:
+        position: bottom
+      default: 0
+    active:
+      type: number
+      title: active
+      description: Description of the active input
+      options:
+        position: bottom
+      default: 1
+    confirmation_code:
+      type: string
+      title: confirmation_code
+      description: Description of the confirmation_code input
+      options:
+        position: bottom
+    confirmed:
+      type: number
+      title: confirmed
+      description: Description of the confirmed input
+      options:
+        position: bottom
+      default: 1
+    fcm_registration_id:
+      type: string
+      title: fcm_registration_id
+      description: Description of the fcm_registration_id input
+      options:
+        position: bottom
+    refer_code:
+      type: string
+      title: refer_code
+      description: Description of the refer_code input
+      options:
+        position: bottom
+    remember_token:
+      type: string
+      title: remember_token
+      description: Description of the remember_token input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    deleted_at:
+      type: date
+      title: deleted_at
+      description: Description of the deleted_at input
+      options:
+        position: bottom
+    fcm_registration_id_driver:
+      type: string
+      title: fcm_registration_id_driver
+      description: Description of the fcm_registration_id_driver input
+      options:
+        position: bottom
+    language:
+      type: string
+      title: language
+      description: Description of the language input
+      options:
+        position: bottom
+      default: en
+    role:
+      type: string
+      title: role
+      description: Description of the role input
+      options:
+        position: bottom
+      enum:
+        - administrator
+        - driver
+        - customer
+    identity_id:
+      type: string
+      title: identity_id
+      description: Description of the identity_id input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 21
+  required: []
+---
+# BUCKET - Taxi Stripe Cards
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-stripe-cards
+spec:
+  title: Taxi Stripe Cards
+  description: "Stripe cards "
+  icon: directions_car
+  primary: card_token
+  readOnly: false
+  history: false
+  properties:
+    card_token:
+      type: string
+      title: card_token
+      description: Description of the card_token input
+      options:
+        position: bottom
+    number:
+      type: string
+      title: number
+      description: Description of the number input
+      options:
+        position: bottom
+    exp_month:
+      type: string
+      title: exp_month
+      description: Description of the exp_month input
+      options:
+        position: bottom
+    exp_year:
+      type: string
+      title: exp_year
+      description: Description of the exp_year input
+      options:
+        position: bottom
+    cvc:
+      type: string
+      title: cvc
+      description: Description of the cvc input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 22
+---
+# BUCKET - Taxi Address
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-address
+spec:
+  title: Taxi Address
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: left
+    address:
+      type: string
+      title: address
+      description: Description of the address input
+      options:
+        position: left
+    longitude:
+      type: number
+      title: longitude
+      description: Description of the longitude input
+      options:
+        position: right
+    latitude:
+      type: number
+      title: latitude
+      description: Description of the latitude input
+      options:
+        position: right
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: right
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: right
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 24
+---
+# BUCKET - Taxi Driver
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-driver
+spec:
+  title: Taxi Driver
+  description: Describe your new bucket
+  icon: directions_car
+  primary: is_verified
+  readOnly: false
+  history: false
+  properties:
+    is_verified:
+      type: number
+      title: is_verified
+      description: Description of the is_verified input
+      options:
+        position: bottom
+      default: 0
+    is_online:
+      type: number
+      title: is_online
+      description: Description of the is_online input
+      options:
+        position: bottom
+      default: 0
+    is_riding:
+      type: number
+      title: is_riding
+      description: Description of the is_riding input
+      options:
+        position: bottom
+      default: 0
+    taxi_number:
+      type: string
+      title: taxi_number
+      description: Description of the taxi_number input
+      options:
+        position: bottom
+    document_url:
+      type: string
+      title: document_url
+      description: Description of the document_url input
+      options:
+        position: bottom
+    license_url:
+      type: string
+      title: license_url
+      description: Description of the license_url input
+      options:
+        position: bottom
+    current_latitude:
+      type: number
+      title: current_latitude
+      description: Description of the current_latitude input
+      options:
+        position: bottom
+      default: 0
+    current_longitude:
+      type: number
+      title: current_longitude
+      description: Description of the current_longitude input
+      options:
+        position: bottom
+      default: 0
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    meta:
+      type: object
+      title: meta
+      description: Description of the meta input
+      options:
+        position: bottom
+      properties:
+        driver_payout:
+          type: object
+          title: driver_payout
+          description: Description of the driver_payout input
+          options:
+            position: bottom
+          properties:
+            bic_swift:
+              type: string
+              title: bic_swift
+              description: Description of the bic_swift input
+              options:
+                position: bottom
+            bank_number:
+              type: string
+              title: bank_number
+              description: Description of the bank_number input
+              options:
+                position: bottom
+            recipient_name:
+              type: string
+              title: recipient_name
+              description: Description of the recipient_name input
+              options:
+                position: bottom
+        driver_billing:
+          type: object
+          title: driver_billing
+          description: Description of the driver_billing input
+          options:
+            position: bottom
+          properties:
+            company_mail:
+              type: string
+              title: company_mail
+              description: Description of the company_mail input
+              options:
+                position: bottom
+              default: " "
+            company_name:
+              type: string
+              title: company_name
+              description: Description of the company_name input
+              options:
+                position: bottom
+              default: " "
+            company_address:
+              type: string
+              title: company_address
+              description: Description of the company_address input
+              options:
+                position: bottom
+              default: " "
+            company_reg:
+              type: string
+              title: company_reg
+              description: Description of the company_reg input
+              options:
+                position: bottom
+              default: " "
+        driver_licence:
+          type: object
+          title: driver_licence
+          description: Description of the driver_licence input
+          options:
+            position: bottom
+          properties:
+            licence_expiry_month:
+              type: string
+              title: licence_expiry_month
+              description: Description of the licence_expiry_month input
+              options:
+                position: bottom
+            licence_expiry_year:
+              type: string
+              title: licence_expiry_year
+              description: Description of the licence_expiry_year input
+              options:
+                position: bottom
+            licence_number:
+              type: string
+              title: licence_number
+              description: Description of the licence_number input
+              options:
+                position: bottom
+    document:
+      type: storage
+      title: document
+      description: Description of the document input
+      options:
+        position: bottom
+    license:
+      type: storage
+      title: license
+      description: Description of the license input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 26
+---
+# BUCKET - Taxi Ride
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-ride
+spec:
+  title: Taxi Ride
+  description: Describe your new bucket
+  icon: directions_car
+  primary: address_from
+  readOnly: false
+  history: false
+  properties:
+    address_from:
+      type: string
+      title: address_from
+      description: Description of the address_from input
+      options:
+        position: left
+    address_to:
+      type: string
+      title: address_to
+      description: Description of the address_to input
+      options:
+        position: left
+    longitude_from:
+      type: number
+      title: longitude_from
+      description: Description of the longitude_from input
+      options:
+        position: right
+    latitude_from:
+      type: number
+      title: latitude_from
+      description: Description of the latitude_from input
+      options:
+        position: right
+    longitude_to:
+      type: number
+      title: longitude_to
+      description: Description of the longitude_to input
+      options:
+        position: right
+    latitude_to:
+      type: number
+      title: latitude_to
+      description: Description of the latitude_to input
+      options:
+        position: right
+    ride_start_at:
+      type: date
+      title: ride_start_at
+      description: Description of the ride_start_at input
+      options:
+        position: left
+    ride_ends_at:
+      type: date
+      title: ride_ends_at
+      description: Description of the ride_ends_at input
+      options:
+        position: left
+    ride_on:
+      type: date
+      title: ride_on
+      description: Description of the ride_on input
+      options:
+        position: left
+    is_scheduled:
+      type: number
+      title: is_scheduled
+      description: Description of the is_scheduled input
+      options:
+        position: right
+      default: 0
+    estimated_pickup_distance:
+      type: number
+      title: estimated_pickup_distance
+      description: Description of the estimated_pickup_distance input
+      options:
+        position: left
+    estimated_pickup_time:
+      type: number
+      title: estimated_pickup_time
+      description: Description of the estimated_pickup_time input
+      options:
+        position: left
+    estimated_distance:
+      type: number
+      title: estimated_distance
+      description: Description of the estimated_distance input
+      options:
+        position: left
+    final_distance:
+      type: number
+      title: final_distance
+      description: Description of the final_distance input
+      options:
+        position: right
+    estimated_time:
+      type: number
+      title: estimated_time
+      description: Description of the estimated_time input
+      options:
+        position: right
+    final_time:
+      type: number
+      title: final_time
+      description: Description of the final_time input
+      options:
+        position: right
+    estimated_fare:
+      type: number
+      title: estimated_fare
+      description: Description of the estimated_fare input
+      options:
+        position: right
+    final_fare:
+      type: number
+      title: final_fare
+      description: Description of the final_fare input
+      options:
+        position: right
+    cancelled_by:
+      type: string
+      title: cancelled_by
+      description: Description of the cancelled_by input
+      options:
+        position: left
+      enum:
+        - customer
+        - driver
+    cancel_reason:
+      type: string
+      title: cancel_reason
+      description: Description of the cancel_reason input
+      options:
+        position: left
+    status:
+      type: string
+      title: status
+      description: Description of the status input
+      options:
+        position: bottom
+      enum:
+        - pending
+        - accepted
+        - onway
+        - ongoing
+        - complete
+        - cancelled
+        - rejected
+        - processing_payment
+        - pending_accept
+        - accept_payment
+      default: pending
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: right
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: right
+      default: :updated_at
+    coupon_code:
+      type: string
+      title: coupon_code
+      description: Description of the coupon_code input
+      options:
+        position: left
+    estimated_discount:
+      type: number
+      title: estimated_discount
+      description: Description of the estimated_discount input
+      options:
+        position: left
+    discount:
+      type: number
+      title: discount
+      description: Description of the discount input
+      options:
+        position: left
+    stripe_card_id:
+      type: string
+      title: stripe_card_id
+      description: Description of the stripe_card_id input
+      options:
+        position: right
+    stripe_card_meta:
+      type: string
+      title: stripe_card_meta
+      description: Description of the stripe_card_meta input
+      options:
+        position: right
+    payment_status:
+      type: string
+      title: payment_status
+      description: Description of the payment_status input
+      options:
+        position: left
+      pattern: ""
+      enum:
+        - paid
+        - unpaid
+      default: unpaid
+  acl:
+    write: true==true
+    read: true==true
+  order: 28
+---
+# BUCKET - Taxi Ride Request
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-ride-request
+spec:
+  title: Taxi Ride Request
+  description: Describe your new bucket
+  icon: directions_car
+  primary: status
+  readOnly: false
+  history: false
+  properties:
+    status:
+      type: string
+      title: status
+      description: Description of the status input
+      options:
+        position: bottom
+      enum:
+        - pending
+        - accepted
+        - rejected
+        - complete
+      default: pending
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 30
+---
+# BUCKET - Taxi Rating
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-rating
+spec:
+  title: Taxi Rating
+  description: Describe your new bucket
+  icon: directions_car
+  primary: rating
+  readOnly: false
+  history: false
+  properties:
+    rating:
+      type: number
+      title: rating
+      description: Description of the rating input
+      options:
+        position: bottom
+    review:
+      type: string
+      title: review
+      description: Description of the review input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 36
+---
+# BUCKET - Taxi Active Log
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-active-log
+spec:
+  title: Taxi Active Log
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+      readOnly: false
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+      default: log
+  acl:
+    write: true==true
+    read: true==true
+  order: 37
+---
+# BUCKET - Taxi Transaction
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-transaction
+spec:
+  title: Taxi Transaction
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+    description:
+      type: string
+      title: description
+      description: Description of the description input
+      options:
+        position: bottom
+    status:
+      type: string
+      title: status
+      description: Description of the status input
+      options:
+        position: bottom
+      enum:
+        - debit
+        - credit
+    amount:
+      type: number
+      title: amount
+      description: Description of the amount input
+      options:
+        position: bottom
+    is_paid:
+      type: number
+      title: is_paid
+      description: Description of the is_paid input
+      options:
+        position: bottom
+      default: 0
+      maximum: 1
+      minimum: 0
+    source:
+      type: string
+      title: source
+      description: Description of the source input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 38
+---
+# BUCKET - Taxi Car
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-car
+spec:
+  title: Taxi Car
+  description: SETO Cars
+  icon: directions_car
+  primary: vehicle_number
+  readOnly: false
+  history: false
+  properties:
+    model:
+      type: string
+      title: model
+      description: Description of the model input
+      options:
+        position: bottom
+    construction_year:
+      type: string
+      title: construction_year
+      description: Description of the construction_year input
+      options:
+        position: bottom
+    vehicle_number:
+      type: string
+      title: vehicle_number
+      description: Description of the vehicle_number input
+      options:
+        position: bottom
+    color:
+      type: string
+      title: color
+      description: Description of the color input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    assigned:
+      type: boolean
+      title: assigned
+      description: Description of the assigned input
+      options:
+        position: bottom
+      default: false
+  acl:
+    write: true==true
+    read: true==true
+  order: 39
+---
+# BUCKET - Taxi Coupon-User
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-coupon-user
+spec:
+  title: Taxi Coupon-User
+  description: SETO Coupons Users
+  icon: directions_car
+  primary: user_coupon
+  readOnly: false
+  history: false
+  properties:
+    user_coupon:
+      type: string
+      title: user_coupon
+      description: Description of the user_coupon input
+      options:
+        position: bottom
+      default: user -> coupon
+    used_at:
+      type: date
+      title: used_at
+      description: Description of the used_at input
+      options:
+        position: bottom
+      default: :created_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 40
+---
+# BUCKET - STRIPE-Card
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-card
+spec:
+  title: STRIPE-Card
+  description: STRIPE-Card of customers
+  required:
+    - customer
+    - token
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    customer:
+      type: relation
+      relationType: onetoone
+      description: who owns this card
+      options:
+        position: bottom
+      title: customer
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-customer
+    card_id:
+      type: string
+      description: DONT TOUCH, IT WILL BE FILLED AUTOMATICALLY
+      options:
+        position: bottom
+      title: card_id
+    status:
+      type: string
+      description: DONT TOUCH, IT WILL BE FILLED AUTOMATICALLY
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    token:
+      type: string
+      description: token of the card
+      options:
+        position: bottom
+      title: token
+  icon: outbond
+  primary: token
+  order: 7
+---
+# BUCKET - STRIPE-Payment Method
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-payment-method
+spec:
+  title: STRIPE-Payment Method
+  description: STRIPE-Payment Method description
+  required:
+    - payment_method_id
+    - customer
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    customer:
+      type: relation
+      relationType: onetoone
+      description: SELECT THE CUSTOMER OF THIS PAYMENT METHOD!
+      options:
+        position: bottom
+      title: customer
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-customer
+    payment_method_id:
+      type: string
+      description: WRITE PAYMENT METHOD ID OF THIS CUSTOMER
+      options:
+        position: bottom
+      title: payment_method_id
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE CHANGED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    default:
+      type: boolean
+      default: false
+      description: SELECT THIS IF YOU WANT THIS PAYMENT METHOD TO BE DEFAULT FOR THIS
+        CUSTOMER.
+      options:
+        position: bottom
+      title: default
+  icon: outbond
+  primary: default
+  order: 8
+---
+# BUCKET - STRIPE-Product
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-product
+spec:
+  required:
+    - name
+  title: STRIPE-Product
+  description: STRIPE-Product description
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    name:
+      type: string
+      description: NAME OF PRODUCT
+      options:
+        position: bottom
+      title: name
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE CHANGED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    product_id:
+      type: string
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY!
+      options:
+        position: bottom
+      title: product_id
+  icon: outbond
+  primary: product_id
+  order: 9
+---
+# BUCKET - STRIPE-Plan
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-plan
+spec:
+  title: STRIPE-Plan
+  description: STRIPE-Plan description
+  required:
+    - currency
+    - interval
+    - product
+    - amount
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    product:
+      type: relation
+      relationType: onetoone
+      description: SELECT A PRODUCT FOR THIS PLAN
+      options:
+        position: bottom
+      title: product
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-product
+    interval:
+      type: string
+      default: month
+      description: PAYING INTERVAL
+      enum:
+        - day
+        - week
+        - month
+        - year
+      options:
+        position: bottom
+      title: interval
+    amount:
+      type: number
+      description: AMOUNT OF MONEY
+      options:
+        position: bottom
+      title: amount
+    currency:
+      type: string
+      description: CURRENCY OF MONEY
+      default: usd
+      options:
+        position: bottom
+      title: currency
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE CHANGED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    price_id:
+      type: string
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY!
+      options:
+        position: bottom
+      title: price_id
+  icon: outbond
+  primary: price_id
+  order: 10
+---
+# BUCKET - STRIPE-Payment
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-payment
+spec:
+  title: STRIPE-Payment
+  description: STRIPE-Payment description
+  required:
+    - payment_type
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    customer:
+      type: relation
+      relationType: onetoone
+      description: SELECT WHEN - CHARGE -
+      options:
+        position: bottom
+      title: customer
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-customer
+    payment_method:
+      type: relation
+      relationType: onetoone
+      description: SELECT WHEN - SUBSCRIBE - AND CUSTOMER HAS NO DEFAULT PAYMENT
+      options:
+        position: bottom
+      title: payment_method
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-payment-method
+    card:
+      type: relation
+      relationType: onetoone
+      description: SELECT WHEN - CHARGE WITH CUSTOMER CARD
+      options:
+        position: bottom
+      title: card
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-card
+    payment_type:
+      type: string
+      description: SELECT PAYMENT TYPE
+      enum:
+        - subscribe
+        - invoice
+        - charge
+      options:
+        position: bottom
+      title: payment_type
+    token:
+      type: string
+      description: FILL WHEN - CHARGE -
+      options:
+        position: bottom
+      title: token
+    price:
+      type: number
+      description: FILL WHEN - CHARGE -
+      options:
+        position: bottom
+      title: price
+    currency:
+      type: string
+      description: SELECT WHEN - CHARGE -
+      default: usd
+      options:
+        position: bottom
+      title: currency
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+    plan:
+      type: relation
+      relationType: onetoone
+      description: SELECT WHEN - SUBSCRIBE -
+      options:
+        position: bottom
+      title: plan
+      bucket:
+        resourceFieldRef:
+          schemaName: stripe-plan
+    subscribe_id:
+      type: string
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY WHEN SUBSCRIBING.
+      options:
+        position: bottom
+      title: subscribe_id
+  icon: outbond
+  primary: subscribe_id
+  order: 11
+---
+# BUCKET - Taxi User
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-user
+spec:
+  title: Taxi User
+  description: Describe your new bucket
+  icon: directions_car
+  primary: email
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Description of the name input
+      options:
+        position: bottom
+    email:
+      type: string
+      title: email
+      description: Description of the email input
+      options:
+        position: bottom
+    password:
+      type: string
+      title: password
+      description: Description of the password input
+      options:
+        position: bottom
+    image:
+      type: storage
+      title: image
+      description: Description of the image input
+      options:
+        position: bottom
+    mobile_number:
+      type: string
+      title: mobile_number
+      description: Description of the mobile_number input
+      options:
+        position: bottom
+    mobile_verified:
+      type: number
+      title: mobile_verified
+      description: Description of the mobile_verified input
+      options:
+        position: bottom
+      default: 0
+    active:
+      type: number
+      title: active
+      description: Description of the active input
+      options:
+        position: bottom
+      default: 1
+    confirmation_code:
+      type: string
+      title: confirmation_code
+      description: Description of the confirmation_code input
+      options:
+        position: bottom
+    confirmed:
+      type: number
+      title: confirmed
+      description: Description of the confirmed input
+      options:
+        position: bottom
+      default: 1
+    fcm_registration_id:
+      type: string
+      title: fcm_registration_id
+      description: Description of the fcm_registration_id input
+      options:
+        position: bottom
+    refer_code:
+      type: string
+      title: refer_code
+      description: Description of the refer_code input
+      options:
+        position: bottom
+    remember_token:
+      type: string
+      title: remember_token
+      description: Description of the remember_token input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    deleted_at:
+      type: date
+      title: deleted_at
+      description: Description of the deleted_at input
+      options:
+        position: bottom
+    fcm_registration_id_driver:
+      type: string
+      title: fcm_registration_id_driver
+      description: Description of the fcm_registration_id_driver input
+      options:
+        position: bottom
+    language:
+      type: string
+      title: language
+      description: Description of the language input
+      options:
+        position: bottom
+      default: en
+    role:
+      type: string
+      title: role
+      description: Description of the role input
+      options:
+        position: bottom
+      enum:
+        - administrator
+        - driver
+        - customer
+    identity_id:
+      type: string
+      title: identity_id
+      description: Description of the identity_id input
+      options:
+        position: bottom
+    cards:
+      type: relation
+      title: cards
+      description: Description of the cards input
+      options:
+        position: bottom
+      relationType: onetomany
+      dependent: false
+      primary: card_token
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-stripe-cards
+  acl:
+    write: true==true
+    read: true==true
+  order: 21
+  required: []
+---
+# BUCKET - Taxi Stripe Cards
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-stripe-cards
+spec:
+  title: Taxi Stripe Cards
+  description: "Stripe cards "
+  icon: directions_car
+  primary: card_token
+  readOnly: false
+  history: false
+  properties:
+    card_token:
+      type: string
+      title: card_token
+      description: Description of the card_token input
+      options:
+        position: bottom
+    number:
+      type: string
+      title: number
+      description: Description of the number input
+      options:
+        position: bottom
+    exp_month:
+      type: string
+      title: exp_month
+      description: Description of the exp_month input
+      options:
+        position: bottom
+    exp_year:
+      type: string
+      title: exp_year
+      description: Description of the exp_year input
+      options:
+        position: bottom
+    cvc:
+      type: string
+      title: cvc
+      description: Description of the cvc input
+      options:
+        position: bottom
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+  acl:
+    write: true==true
+    read: true==true
+  order: 22
+---
+# BUCKET - Taxi Address
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-address
+spec:
+  title: Taxi Address
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: left
+    address:
+      type: string
+      title: address
+      description: Description of the address input
+      options:
+        position: left
+    longitude:
+      type: number
+      title: longitude
+      description: Description of the longitude input
+      options:
+        position: right
+    latitude:
+      type: number
+      title: latitude
+      description: Description of the latitude input
+      options:
+        position: right
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: right
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: right
+      default: :updated_at
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: left
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+  acl:
+    write: true==true
+    read: true==true
+  order: 24
+---
+# BUCKET - Taxi Vehicle Type
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-vehicle-type
+spec:
+  title: Taxi Vehicle Type
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+    base_fare:
+      type: number
+      title: base_fare
+      description: Description of the base_fare input
+      options:
+        position: bottom
+    distance_charges_per_unit:
+      type: number
+      title: distance_charges_per_unit
+      description: Description of the distance_charges_per_unit input
+      options:
+        position: bottom
+    time_charges_per_minute:
+      type: number
+      title: time_charges_per_minute
+      description: Description of the time_charges_per_minute input
+      options:
+        position: bottom
+    other_charges:
+      type: number
+      title: other_charges
+      description: Description of the other_charges input
+      options:
+        position: bottom
+    seats:
+      type: number
+      title: seats
+      description: Description of the seats input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    image:
+      type: storage
+      title: image
+      description: Description of the image input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 25
+---
+# BUCKET - Taxi Driver
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-driver
+spec:
+  title: Taxi Driver
+  description: Describe your new bucket
+  icon: directions_car
+  primary: is_verified
+  readOnly: false
+  history: false
+  properties:
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: email
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    vehicle_type:
+      type: relation
+      title: vehicle_type
+      description: Description of the vehicle_type input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: title
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-vehicle-type
+    car:
+      type: relation
+      title: car
+      description: Description of the car input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: vehicle_number
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-car
+    is_verified:
+      type: number
+      title: is_verified
+      description: Description of the is_verified input
+      options:
+        position: bottom
+      default: 0
+    is_online:
+      type: number
+      title: is_online
+      description: Description of the is_online input
+      options:
+        position: bottom
+      default: 0
+    is_riding:
+      type: number
+      title: is_riding
+      description: Description of the is_riding input
+      options:
+        position: bottom
+      default: 0
+    taxi_number:
+      type: string
+      title: taxi_number
+      description: Description of the taxi_number input
+      options:
+        position: bottom
+    document_url:
+      type: string
+      title: document_url
+      description: Description of the document_url input
+      options:
+        position: bottom
+    license_url:
+      type: string
+      title: license_url
+      description: Description of the license_url input
+      options:
+        position: bottom
+    current_latitude:
+      type: number
+      title: current_latitude
+      description: Description of the current_latitude input
+      options:
+        position: bottom
+      default: 0
+    current_longitude:
+      type: number
+      title: current_longitude
+      description: Description of the current_longitude input
+      options:
+        position: bottom
+      default: 0
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    meta:
+      type: object
+      title: meta
+      description: Description of the meta input
+      options:
+        position: bottom
+      properties:
+        driver_payout:
+          type: object
+          title: driver_payout
+          description: Description of the driver_payout input
+          options:
+            position: bottom
+          properties:
+            bic_swift:
+              type: string
+              title: bic_swift
+              description: Description of the bic_swift input
+              options:
+                position: bottom
+            bank_number:
+              type: string
+              title: bank_number
+              description: Description of the bank_number input
+              options:
+                position: bottom
+            recipient_name:
+              type: string
+              title: recipient_name
+              description: Description of the recipient_name input
+              options:
+                position: bottom
+        driver_billing:
+          type: object
+          title: driver_billing
+          description: Description of the driver_billing input
+          options:
+            position: bottom
+          properties:
+            company_mail:
+              type: string
+              title: company_mail
+              description: Description of the company_mail input
+              options:
+                position: bottom
+              default: " "
+            company_name:
+              type: string
+              title: company_name
+              description: Description of the company_name input
+              options:
+                position: bottom
+              default: " "
+            company_address:
+              type: string
+              title: company_address
+              description: Description of the company_address input
+              options:
+                position: bottom
+              default: " "
+            company_reg:
+              type: string
+              title: company_reg
+              description: Description of the company_reg input
+              options:
+                position: bottom
+              default: " "
+        driver_licence:
+          type: object
+          title: driver_licence
+          description: Description of the driver_licence input
+          options:
+            position: bottom
+          properties:
+            licence_expiry_month:
+              type: string
+              title: licence_expiry_month
+              description: Description of the licence_expiry_month input
+              options:
+                position: bottom
+            licence_expiry_year:
+              type: string
+              title: licence_expiry_year
+              description: Description of the licence_expiry_year input
+              options:
+                position: bottom
+            licence_number:
+              type: string
+              title: licence_number
+              description: Description of the licence_number input
+              options:
+                position: bottom
+    document:
+      type: storage
+      title: document
+      description: Description of the document input
+      options:
+        position: bottom
+    license:
+      type: storage
+      title: license
+      description: Description of the license input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 26
+---
+# BUCKET - Taxi Setting
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-setting
+spec:
+  title: Taxi Setting
+  description: Describe your new bucket
+  icon: directions_car
+  primary: key
+  readOnly: false
+  history: false
+  properties:
+    key:
+      type: string
+      title: key
+      description: Description of the key input
+      options:
+        position: bottom
+    value:
+      type: string
+      title: value
+      description: Description of the value input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 27
+---
+# BUCKET - Taxi Ride
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-ride
+spec:
+  title: Taxi Ride
+  description: Describe your new bucket
+  icon: directions_car
+  primary: address_from
+  readOnly: false
+  history: false
+  properties:
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: left
+      relationType: onetoone
+      primary: email
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    address_from:
+      type: string
+      title: address_from
+      description: Description of the address_from input
+      options:
+        position: left
+    address_to:
+      type: string
+      title: address_to
+      description: Description of the address_to input
+      options:
+        position: left
+    vehicle_type:
+      type: relation
+      title: vehicle_type
+      description: Description of the vehicle_type input
+      options:
+        position: right
+      relationType: onetoone
+      primary: title
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-vehicle-type
+    driver:
+      type: relation
+      title: driver
+      description: Description of the driver input
+      options:
+        position: right
+      relationType: onetoone
+      primary: is_verified
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-driver
+    longitude_from:
+      type: number
+      title: longitude_from
+      description: Description of the longitude_from input
+      options:
+        position: right
+    latitude_from:
+      type: number
+      title: latitude_from
+      description: Description of the latitude_from input
+      options:
+        position: right
+    longitude_to:
+      type: number
+      title: longitude_to
+      description: Description of the longitude_to input
+      options:
+        position: right
+    latitude_to:
+      type: number
+      title: latitude_to
+      description: Description of the latitude_to input
+      options:
+        position: right
+    ride_start_at:
+      type: date
+      title: ride_start_at
+      description: Description of the ride_start_at input
+      options:
+        position: left
+    ride_ends_at:
+      type: date
+      title: ride_ends_at
+      description: Description of the ride_ends_at input
+      options:
+        position: left
+    ride_on:
+      type: date
+      title: ride_on
+      description: Description of the ride_on input
+      options:
+        position: left
+    is_scheduled:
+      type: number
+      title: is_scheduled
+      description: Description of the is_scheduled input
+      options:
+        position: right
+      default: 0
+    estimated_pickup_distance:
+      type: number
+      title: estimated_pickup_distance
+      description: Description of the estimated_pickup_distance input
+      options:
+        position: left
+    estimated_pickup_time:
+      type: number
+      title: estimated_pickup_time
+      description: Description of the estimated_pickup_time input
+      options:
+        position: left
+    estimated_distance:
+      type: number
+      title: estimated_distance
+      description: Description of the estimated_distance input
+      options:
+        position: left
+    final_distance:
+      type: number
+      title: final_distance
+      description: Description of the final_distance input
+      options:
+        position: right
+    estimated_time:
+      type: number
+      title: estimated_time
+      description: Description of the estimated_time input
+      options:
+        position: right
+    final_time:
+      type: number
+      title: final_time
+      description: Description of the final_time input
+      options:
+        position: right
+    estimated_fare:
+      type: number
+      title: estimated_fare
+      description: Description of the estimated_fare input
+      options:
+        position: right
+    final_fare:
+      type: number
+      title: final_fare
+      description: Description of the final_fare input
+      options:
+        position: right
+    cancelled_by:
+      type: string
+      title: cancelled_by
+      description: Description of the cancelled_by input
+      options:
+        position: left
+      enum:
+        - customer
+        - driver
+    cancel_reason:
+      type: string
+      title: cancel_reason
+      description: Description of the cancel_reason input
+      options:
+        position: left
+    status:
+      type: string
+      title: status
+      description: Description of the status input
+      options:
+        position: bottom
+      enum:
+        - pending
+        - accepted
+        - onway
+        - ongoing
+        - complete
+        - cancelled
+        - rejected
+        - processing_payment
+        - pending_accept
+        - accept_payment
+      default: pending
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: right
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: right
+      default: :updated_at
+    coupon_code:
+      type: string
+      title: coupon_code
+      description: Description of the coupon_code input
+      options:
+        position: left
+    estimated_discount:
+      type: number
+      title: estimated_discount
+      description: Description of the estimated_discount input
+      options:
+        position: left
+    discount:
+      type: number
+      title: discount
+      description: Description of the discount input
+      options:
+        position: left
+    stripe_card_id:
+      type: string
+      title: stripe_card_id
+      description: Description of the stripe_card_id input
+      options:
+        position: right
+    stripe_card_meta:
+      type: string
+      title: stripe_card_meta
+      description: Description of the stripe_card_meta input
+      options:
+        position: right
+    payment_status:
+      type: string
+      title: payment_status
+      description: Description of the payment_status input
+      options:
+        position: left
+      pattern: ""
+      enum:
+        - paid
+        - unpaid
+      default: unpaid
+    payment_method:
+      type: relation
+      title: payment_method
+      description: Description of the payment_method input
+      options:
+        position: left
+      relationType: onetoone
+      primary: slug
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-payment-method
+  acl:
+    write: true==true
+    read: true==true
+  order: 28
+---
+# BUCKET - Taxi Payment Method
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-payment-method
+spec:
+  title: Taxi Payment Method
+  description: Describe your new bucket
+  icon: directions_car
+  primary: slug
+  readOnly: false
+  history: false
+  properties:
+    slug:
+      type: string
+      title: slug
+      description: Description of the slug input
+      options:
+        position: bottom
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 29
+---
+# BUCKET - Taxi Ride Request
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-ride-request
+spec:
+  title: Taxi Ride Request
+  description: Describe your new bucket
+  icon: directions_car
+  primary: status
+  readOnly: false
+  history: false
+  properties:
+    driver:
+      type: relation
+      title: driver
+      description: Description of the driver input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-driver
+    ride:
+      type: relation
+      title: ride
+      description: Description of the ride input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-ride
+    status:
+      type: string
+      title: status
+      description: Description of the status input
+      options:
+        position: bottom
+      enum:
+        - pending
+        - accepted
+        - rejected
+        - complete
+      default: pending
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 30
+---
+# BUCKET - STRIPE-Customer
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: stripe-customer
+spec:
+  title: STRIPE-Customer
+  description: STRIPE-Customer description
+  required:
+    - email
+  acl:
+    write: true==true
+    read: true==true
+  properties:
+    name:
+      type: string
+      options:
+        position: bottom
+      title: name
+    email:
+      type: string
+      options:
+        position: bottom
+      title: email
+    stripe_customer_id:
+      type: string
+      description: DO NOT TOUCH! IT WILL BE FILLED AUTOMATICALLY!
+      options:
+        position: bottom
+      title: stripe_customer_id
+    status:
+      type: string
+      default: creating
+      description: DO NOT TOUCH! IT WILL BE CHANGED AUTOMATICALLY!
+      enum:
+        - creating
+        - done
+        - error
+      options:
+        position: bottom
+      title: status
+  icon: outbond
+  primary: status
+  order: 31
+  history: false
+---
+# BUCKET - Taxi Support
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-support
+spec:
+  title: Taxi Support
+  description: Describe your new bucket
+  icon: directions_car
+  primary: email
+  readOnly: false
+  history: false
+  properties:
+    email:
+      type: string
+      title: email
+      description: Description of the email input
+      options:
+        position: bottom
+    name:
+      type: string
+      title: name
+      description: Description of the name input
+      options:
+        position: bottom
+    message:
+      type: textarea
+      title: message
+      description: Description of the message input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 33
+---
+# BUCKET - Taxi Faq
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-faq
+spec:
+  title: Taxi Faq
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+    short_description:
+      type: string
+      title: short_description
+      description: Description of the short_description input
+      options:
+        position: bottom
+    description:
+      type: textarea
+      title: description
+      description: Description of the description input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 34
+---
+# BUCKET - Taxi Coupon
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-coupon
+spec:
+  title: Taxi Coupon
+  description: Describe your new bucket
+  icon: directions_car
+  primary: code
+  readOnly: false
+  history: false
+  properties:
+    code:
+      type: string
+      title: code
+      description: Description of the code input
+      options:
+        position: bottom
+    reward:
+      type: number
+      title: reward
+      description: Description of the reward input
+      options:
+        position: bottom
+    type:
+      type: string
+      title: type
+      description: Description of the type input
+      options:
+        position: bottom
+      enum:
+        - fixed
+        - percent
+    data:
+      type: textarea
+      title: data
+      description: Description of the data input
+      options:
+        position: bottom
+    expires_at:
+      type: date
+      title: expires_at
+      description: Description of the expires_at input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 35
+---
+# BUCKET - Taxi Rating
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-rating
+spec:
+  title: Taxi Rating
+  description: Describe your new bucket
+  icon: directions_car
+  primary: rating
+  readOnly: false
+  history: false
+  properties:
+    rating:
+      type: number
+      title: rating
+      description: Description of the rating input
+      options:
+        position: bottom
+    review:
+      type: string
+      title: review
+      description: Description of the review input
+      options:
+        position: bottom
+    rating_to:
+      type: relation
+      title: rating_to
+      description: Description of the rating_to input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: email
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    rating_from:
+      type: relation
+      title: rating_from
+      description: Description of the rating_from input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: email
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    ride:
+      type: relation
+      title: ride
+      description: Description of the ride input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-ride
+  acl:
+    write: true==true
+    read: true==true
+  order: 36
+---
+# BUCKET - Taxi Active Log
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-active-log
+spec:
+  title: Taxi Active Log
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    user_id:
+      type: relation
+      title: user_id
+      description: Description of the user_id input
+      options:
+        position: bottom
+      relationType: onetomany
+      primary: user_id
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+      readOnly: false
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+      default: log
+  acl:
+    write: true==true
+    read: true==true
+  order: 37
+---
+# BUCKET - Taxi Transaction
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-transaction
+spec:
+  title: Taxi Transaction
+  description: Describe your new bucket
+  icon: directions_car
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Description of the title input
+      options:
+        position: bottom
+    description:
+      type: string
+      title: description
+      description: Description of the description input
+      options:
+        position: bottom
+    status:
+      type: string
+      title: status
+      description: Description of the status input
+      options:
+        position: bottom
+      enum:
+        - debit
+        - credit
+    amount:
+      type: number
+      title: amount
+      description: Description of the amount input
+      options:
+        position: bottom
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: email
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    is_paid:
+      type: number
+      title: is_paid
+      description: Description of the is_paid input
+      options:
+        position: bottom
+      default: 0
+      maximum: 1
+      minimum: 0
+    ride:
+      type: relation
+      title: ride
+      description: Description of the ride input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: address_from
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-ride
+    source:
+      type: string
+      title: source
+      description: Description of the source input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 38
+---
+# BUCKET - Taxi Car
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-car
+spec:
+  title: Taxi Car
+  description: SETO Cars
+  icon: directions_car
+  primary: vehicle_number
+  readOnly: false
+  history: false
+  properties:
+    vehicle_type:
+      type: relation
+      title: vehicle_type
+      description: Description of the vehicle_type input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: title
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-vehicle-type
+    model:
+      type: string
+      title: model
+      description: Description of the model input
+      options:
+        position: bottom
+    construction_year:
+      type: string
+      title: construction_year
+      description: Description of the construction_year input
+      options:
+        position: bottom
+    vehicle_number:
+      type: string
+      title: vehicle_number
+      description: Description of the vehicle_number input
+      options:
+        position: bottom
+    color:
+      type: string
+      title: color
+      description: Description of the color input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+      default: :created_at
+    updated_at:
+      type: date
+      title: updated_at
+      description: Description of the updated_at input
+      options:
+        position: bottom
+      default: :updated_at
+    assigned:
+      type: boolean
+      title: assigned
+      description: Description of the assigned input
+      options:
+        position: bottom
+      default: false
+  acl:
+    write: true==true
+    read: true==true
+  order: 39
+---
+# BUCKET - Taxi Coupon-User
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: taxi-coupon-user
+spec:
+  title: Taxi Coupon-User
+  description: SETO Coupons Users
+  icon: directions_car
+  primary: user_coupon
+  readOnly: false
+  history: false
+  properties:
+    user_coupon:
+      type: string
+      title: user_coupon
+      description: Description of the user_coupon input
+      options:
+        position: bottom
+      default: user -> coupon
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: email
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-user
+    coupon:
+      type: relation
+      title: coupon
+      description: Description of the coupon input
+      options:
+        position: bottom
+      relationType: onetoone
+      primary: code
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: taxi-coupon
+    used_at:
+      type: date
+      title: used_at
+      description: Description of the used_at input
+      options:
+        position: bottom
+      default: :created_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 40
+---
+# FUNCTION - Taxi Ride Accept
+apiVersion: function/v1
+kind: Function
+metadata:
+  name: taxi-ride-accept
+spec:
+  description: Seto ride accept
+  language: javascript
+  timeout: 50
+  environment:
+    - name: STRIPE_PAYMENT_METHOD_ID
+      value: 5fe44ef6dfdd0f002c91efd7
+    - name: STRIPE_PAYMENT_BUCKET
+      value: 60953e7ba55024002c751a53
+    - name: STRIPE_CUSTOMER_BUCKET
+      value: 60953e73a55024002c751a4e
+    - name: STRIPE_CARD_BUCKET
+      value: 60953e75a55024002c751a4f
+    - name: SECRET_API_KEY
+      value: 5ks9718kiybw51i
+    - name: TAXI_RIDE_BUCKET
+      value: 5fe44b3bdfdd0f002c91efc9
+    - name: GOOGLE_MAP_API_KEY
+      value: AIzaSyDem6KpKY6-1Y68c1o3r-paNJPGIujpeik
+    - name: TAXI_COUPON_USER_BUCKET
+      value: 601d2fc51f7cc7002cebe5cc
+    - name: TAXI_COUPON_BUCKET
+      value: 5fe5af73dfdd0f002c91f2da
+  dependency:
+    - name: "@spica-devkit/bucket"
+      version: ^0.8.8
+    - name: fast-json-patch
+      version: ^3.0.0-1
+    - name: node-fetch
+      version: ^2.6.1
+  title: Taxi Ride Accept
+  code: ./function/taxi-ride-accept.js
+  runtime:
+    name: Node
+    language: Javascript
+---
+# FUNCTION - Taxi Summary Rating
+apiVersion: function/v1
+kind: Function
+metadata:
+  name: taxi-summary-rating
+spec:
+  description: Taxi summary rating
+  language: javascript
+  timeout: 60
+  environment:
+    - name: TAXI_RATING_BUCKET
+      value: 5fe5d834dfdd0f002c91f319
+    - name: SECRET_API_KEY
+      value: 5ks9718kiybw51i
+  dependency:
+    - name: "@spica-devkit/bucket"
+      version: ^0.9.7
+  title: Taxi Summary Rating
+  code: ./function/taxi-summary-rating.js
+  runtime:
+    name: Node
+    language: Javascript
+---
+# FUNCTION - Taxi Auth
+apiVersion: function/v1
+kind: Function
+metadata:
+  name: taxi-auth
+spec:
+  description: Taxi auth function
+  language: javascript
+  timeout: 40
+  environment:
+    - name: SECRET_API_KEY
+      value: 5ks9718kiybw51i
+    - name: TAXI_USER_BUCKET
+      value: 5fe059c3bf26e5002c60cb14
+    - name: TAXI_PUBLIC_POLICY
+      value: 5fe20efddfdd0f002c91ee06
+  dependency:
+    - name: "@spica-devkit/bucket"
+      version: ^0.8.7
+    - name: jsonwebtoken
+      version: ^8.5.1
+    - name: jwt-decode
+      version: ^3.1.2
+    - name: node-fetch
+      version: ^2.6.1
+    - name: request
+      version: ^2.88.2
+    - name: util
+      version: ^0.12.3
+  title: Taxi Auth
+  code: ./function/taxi-auth.js
+  runtime:
+    name: Node
+    language: Javascript
+---
+# TRIGGER - rideAccept
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: rideAccept
+spec:
+  type: bucket
+  active: true
+  batch:
+    deadline: 45
+    limit: 9007199254740991
+  name: rideAccept
+  func: taxi-ride-accept
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: taxi-ride-request
+    type: UPDATE
+---
+# TRIGGER - rideUpdate
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: rideUpdate
+spec:
+  type: bucket
+  active: true
+  batch:
+    deadline: 45
+    limit: 9007199254740991
+  name: rideUpdate
+  func: taxi-ride-accept
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: taxi-ride
+    type: UPDATE
+---
+# TRIGGER - summaryRating
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: summaryRating
+spec:
+  type: http
+  active: true
+  name: summaryRating
+  func: taxi-summary-rating
+  httpOptions:
+    method: Get
+    path: /summary_rating
+---
+# TRIGGER - register
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: register
+spec:
+  type: http
+  active: true
+  name: register
+  func: taxi-auth
+  httpOptions:
+    method: Post
+    path: /register
+---
+# TRIGGER - login
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: login
+spec:
+  type: http
+  active: true
+  name: login
+  func: taxi-auth
+  httpOptions:
+    method: Post
+    path: /login
+---
+# TRIGGER - checkUser
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: checkUser
+spec:
+  type: http
+  active: true
+  name: checkUser
+  func: taxi-auth
+  httpOptions:
+    method: Get
+    path: /check_user
