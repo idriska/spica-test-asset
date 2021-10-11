@@ -1,0 +1,232 @@
+# FUNCTION - Taxi Stripe Functions
+apiVersion: function/v1
+kind: Function
+metadata:
+  name: taxi-stripe-functions-function
+spec:
+  description: Stripe Functions description
+  language: javascript
+  timeout: 50
+  environment:
+    - name: SECRET_API_KEY
+      value: xqpvm19kucgzjwo
+    - name: STRIPE_TEST
+      value: stripe secret test here
+    - name: CUSTOMER_BUCKET_ID
+      value: 615acdca43d5dc002db86677
+    - name: PAYMENT_METHOD_ID
+      value: 615acdcc43d5dc002db8667d
+    - name: PRODUCT_BUCKET_ID
+      value: 615acdcd43d5dc002db8667f
+    - name: PLAN_BUCKET_ID
+      value: 615acdcf43d5dc002db86689
+    - name: PAYMENT_BUCKET_ID
+      value: undefined
+    - name: CARD_BUCKET_ID
+      value: 615acdcc43d5dc002db8667a
+    - name: TAXI_CARDS_BUCKET
+      value: 5fe1f455dfdd0f002c91eda5
+    - name: TAXI_USER_BUCKET
+      value: 5fe059c3bf26e5002c60cb14
+  dependency:
+    - name: "@spica-devkit/bucket"
+      version: ^0.9.11
+    - name: stripe
+      version: ^8.178.0
+  title: Taxi Stripe Functions
+  code: ./function/taxi-stripe-functions-function.js
+  runtime:
+    name: Node
+    language: Javascript
+---
+# TRIGGER - paymentMethod
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: paymentMethod
+spec:
+  active: true
+  type: bucket
+  name: paymentMethod
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-payment-method-bucket
+    type: INSERT
+---
+# TRIGGER - payment
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: payment
+spec:
+  active: true
+  type: bucket
+  name: payment
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-payment-bucket
+    type: INSERT
+---
+# TRIGGER - customer
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: customer
+spec:
+  active: true
+  type: bucket
+  name: customer
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-customer-bucket
+    type: INSERT
+---
+# TRIGGER - product
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: product
+spec:
+  active: true
+  type: bucket
+  name: product
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-product-bucket
+    type: INSERT
+---
+# TRIGGER - plan
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: plan
+spec:
+  active: true
+  type: bucket
+  name: plan
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-plan-bucket
+    type: INSERT
+---
+# TRIGGER - card
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: card
+spec:
+  active: true
+  type: bucket
+  name: card
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-card-bucket
+    type: INSERT
+---
+# TRIGGER - deletePaymentMethod
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: deletePaymentMethod
+spec:
+  active: true
+  type: bucket
+  name: deletePaymentMethod
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-payment-method-bucket
+    type: DELETE
+---
+# TRIGGER - deleteProduct
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: deleteProduct
+spec:
+  active: true
+  type: bucket
+  name: deleteProduct
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-product-bucket
+    type: DELETE
+---
+# TRIGGER - deletePayment
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: deletePayment
+spec:
+  active: true
+  type: bucket
+  name: deletePayment
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-payment-bucket
+    type: DELETE
+---
+# TRIGGER - deletePlan
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: deletePlan
+spec:
+  active: true
+  type: bucket
+  name: deletePlan
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-plan-bucket
+    type: DELETE
+---
+# TRIGGER - deleteCard
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: deleteCard
+spec:
+  active: true
+  type: bucket
+  name: deleteCard
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: stripe-card-bucket
+    type: DELETE
+---
+# TRIGGER - createStripeToken
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: createStripeToken
+spec:
+  type: bucket
+  active: true
+  name: createStripeToken
+  func: taxi-stripe-functions-function
+  bucketOptions:
+    bucket:
+      resourceFieldRef:
+        schemaName: taxi-stripe-cards-bucket
+    type: INSERT
