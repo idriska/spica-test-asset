@@ -13,6 +13,19 @@ spec:
     name: Node
     language: Javascript
 ---
+# TRIGGER - default
+apiVersion: function/v1
+kind: Trigger
+metadata:
+  name: default
+spec:
+  type: firehose
+  active: true
+  name: default
+  func: test-function-function
+  firehoseOptions:
+    event: "*"
+---
 # TRIGGER - testHandler
 apiVersion: function/v1
 kind: Trigger
