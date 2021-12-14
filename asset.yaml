@@ -1,0 +1,773 @@
+# BUCKET - User
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-user-bucket
+spec:
+  title: User
+  description: Describe your new bucket
+  icon: view_stream
+  primary: mail
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Description of the name input
+      options:
+        position: bottom
+    surname:
+      type: string
+      title: surname
+      description: Description of the surname input
+      options:
+        position: bottom
+    gender:
+      type: string
+      title: gender
+      description: Description of the gender input
+      options:
+        position: bottom
+      enum:
+        - male
+        - female
+        - other
+    vip:
+      type: boolean
+      title: vip
+      description: Description of the vip input
+      options:
+        position: bottom
+      default: false
+    birthdate:
+      type: date
+      title: birthdate
+      description: Description of the birthdate input
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Description of the created_at input
+      options:
+        position: bottom
+    phone_number:
+      type: string
+      title: phone_number
+      description: Description of the phone_number input
+      options:
+        position: bottom
+    mail:
+      type: string
+      title: mail
+      description: Description of the mail input
+      options:
+        position: bottom
+    image:
+      type: storage
+      title: image
+      description: Description of the image input
+      options:
+        position: bottom
+    identity:
+      type: string
+      title: identity
+      description: Description of the identity input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 0
+---
+# BUCKET - Teacher
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-teacher-bucket
+spec:
+  title: Teacher
+  description: Teacher Bucket
+  icon: view_stream
+  primary: mail
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Teacher
+      options:
+        position: left
+    surname:
+      type: string
+      title: surname
+      description: Surname of Teacher
+      options:
+        position: bottom
+    mail:
+      type: string
+      title: mail
+      description: Mail of Teacher
+      options:
+        position: bottom
+    phone_number:
+      type: string
+      title: phone_number
+      description: Phone Number of Teacher
+      options:
+        position: bottom
+    gender:
+      type: string
+      title: gender
+      description: Gender of Teacher
+      options:
+        position: bottom
+      enum:
+        - male
+        - female
+        - other
+    picture:
+      type: storage
+      title: picture
+      description: Profile Picture of Teacher
+      options:
+        position: bottom
+    birthday:
+      type: date
+      title: birthday
+      description: Birthday of Teacher
+      options:
+        position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Entry created date
+      options:
+        position: bottom
+      default: :created_at
+    speciality:
+      type: relation
+      title: speciality
+      description: Speciality of Teacher
+      options:
+        position: bottom
+      relationType: onetomany
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-teacher-speciality-bucket
+    biography:
+      type: textarea
+      title: biography
+      description: Description of the biography input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 1
+---
+# BUCKET - Video Packet
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-video-packet-bucket
+spec:
+  title: Video Packet
+  description: Packet of Videos
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Title of packet
+      options:
+        position: left
+    videos:
+      type: relation
+      title: videos
+      description: Videos of Packet
+      options:
+        position: bottom
+      relationType: onetomany
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-video-bucket
+  acl:
+    write: true==true
+    read: true==true
+  order: 2
+---
+# BUCKET - Food Program
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-food-program-bucket
+spec:
+  title: Food Program
+  description: Food Program Bucket
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Program
+      options:
+        position: left
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-user-bucket
+    teacher:
+      type: relation
+      title: teacher
+      description: Teacher of Program
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-teacher-bucket
+    created_at:
+      type: date
+      title: created_at
+      description: Entry created date
+      options:
+        position: bottom
+      default: :created_at
+    days:
+      type: array
+      title: days
+      description: Description of the days input
+      options:
+        position: bottom
+      items:
+        title: Title of the items
+        type: object
+        properties:
+          day_of_week:
+            type: number
+            title: day_of_week
+            description: Description of the day_of_week input
+            options:
+              position: bottom
+            minimum: 0
+            maximum: 7
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+              - 7
+          meal:
+            type: array
+            title: meal
+            description: Description of the meal input
+            options:
+              position: bottom
+            items:
+              title: Title of the items
+              type: object
+              properties:
+                description:
+                  type: richtext
+                  title: description
+                  description: Description of the description input
+                  options:
+                    position: bottom
+                number_of_meal:
+                  type: number
+                  title: number_of_meal
+                  description: Description of the number_of_meal input
+                  options:
+                    position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 3
+---
+# BUCKET - Video
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-video-bucket
+spec:
+  title: Video
+  description: Video Bucket
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Video
+      options:
+        position: left
+    description:
+      type: textarea
+      title: description
+      description: Description of Video
+      options:
+        position: right
+    image:
+      type: storage
+      title: image
+      description: Image of Video
+      options:
+        position: bottom
+    vip:
+      type: boolean
+      title: vip
+      description: Is it only available for vip person ?
+      options:
+        position: bottom
+      default: false
+    duration:
+      type: number
+      title: duration
+      description: Duration of Video
+      options:
+        position: bottom
+    video:
+      type: storage
+      title: video
+      description: Video File
+      options:
+        position: bottom
+    upload_date:
+      type: date
+      title: upload_date
+      description: Entry Upload Date
+      options:
+        position: bottom
+      default: :created_at
+    category:
+      type: relation
+      title: category
+      description: Description of the category input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-category-bucket
+    teacher:
+      type: relation
+      title: teacher
+      description: Description of the teacher input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-teacher-bucket
+  acl:
+    write: true==true
+    read: true==true
+  order: 4
+---
+# BUCKET - Category
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-category-bucket
+spec:
+  title: Category
+  description: Category Bucket
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Category
+      options:
+        position: left
+    description:
+      type: textarea
+      title: description
+      description: Description of Category
+      options:
+        position: right
+    img:
+      type: storage
+      title: img
+      description: Description of the img input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 5
+---
+# BUCKET - Weekly Program
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-weekly-program-bucket
+spec:
+  title: Weekly Program
+  description: Weekly Program Bucket
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Weekly Program
+      options:
+        position: left
+    days:
+      type: array
+      title: days
+      description: Description of the days input
+      options:
+        position: left
+      items:
+        title: Title of the items
+        type: object
+        properties:
+          day_of_week:
+            type: string
+            title: day_of_week
+            description: Description of the day_of_week input
+            options:
+              position: bottom
+          hours:
+            type: array
+            title: hours
+            description: Description of the hours input
+            options:
+              position: bottom
+            items:
+              title: Title of the items
+              type: object
+              properties:
+                from:
+                  type: string
+                  title: from
+                  description: Description of the from input
+                  options:
+                    position: bottom
+                until:
+                  type: string
+                  title: until
+                  description: Description of the until input
+                  options:
+                    position: bottom
+                description:
+                  type: string
+                  title: description
+                  description: Description of the description input
+                  options:
+                    position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: Entry created date
+      options:
+        position: right
+      default: :created_at
+  acl:
+    write: true==true
+    read: true==true
+  order: 6
+---
+# BUCKET - Performance
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-performance-bucket
+spec:
+  title: Performance
+  description: Performance of User
+  icon: view_stream
+  primary: title
+  readOnly: false
+  history: false
+  properties:
+    title:
+      type: string
+      title: title
+      description: Title of Performance
+      options:
+        position: bottom
+    teacher:
+      type: relation
+      title: teacher
+      description: Teacher of Performance
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-teacher-bucket
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-user-bucket
+    created_at:
+      type: date
+      title: created_at
+      description: Entry created date
+      options:
+        position: bottom
+      default: :created_at
+    metrics:
+      type: object
+      title: metrics
+      description: Description of the metrics input
+      options:
+        position: bottom
+      properties:
+        left_arm:
+          type: string
+          title: left_arm
+          description: Description of the left_arm input
+          options:
+            position: bottom
+        right_arm:
+          type: string
+          title: right_arm
+          description: Description of the right_arm input
+          options:
+            position: bottom
+        right_leg:
+          type: string
+          title: right_leg
+          description: Description of the right_leg input
+          options:
+            position: bottom
+        left_leg:
+          type: string
+          title: left_leg
+          description: Description of the left_leg input
+          options:
+            position: bottom
+        shoulders:
+          type: string
+          title: shoulders
+          description: Description of the shoulders input
+          options:
+            position: bottom
+        weight:
+          type: string
+          title: weight
+          description: Description of the weight input
+          options:
+            position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 7
+---
+# BUCKET - Training
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-training-bucket
+spec:
+  title: Training
+  description: User Training
+  icon: view_stream
+  primary: description
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Training
+      options:
+        position: left
+    packet:
+      type: relation
+      title: packet
+      description: Packet of Training
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-video-packet-bucket
+    teacher:
+      type: relation
+      title: teacher
+      description: Teacher of Training
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-teacher-bucket
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-user-bucket
+    description:
+      type: textarea
+      title: description
+      description: Description of the description input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 8
+---
+# BUCKET - Teacher Speciality
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-teacher-speciality-bucket
+spec:
+  title: Teacher Speciality
+  description: Teacher Speciality Bucket
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name of Speciality
+      options:
+        position: left
+    description:
+      type: textarea
+      title: description
+      description: Description of the description input
+      options:
+        position: bottom
+    categories:
+      type: relation
+      title: categories
+      description: Description of the categories input
+      options:
+        position: bottom
+      relationType: onetomany
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-category-bucket
+    img:
+      type: storage
+      title: img
+      description: Description of the img input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 9
+---
+# BUCKET - Watched Video
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-watched-video-bucket
+spec:
+  title: Watched Video
+  description: Watched Video of User
+  icon: view_stream
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Name
+      options:
+        position: left
+    video:
+      type: relation
+      title: video
+      description: Video of Watched Video
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-video-bucket
+    watched_date:
+      type: date
+      title: watched_date
+      description: Description of the watched_date input
+      options:
+        position: bottom
+      default: :updated_at
+    user:
+      type: relation
+      title: user
+      description: Description of the user input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-user-bucket
+  acl:
+    write: true==true
+    read: true==true
+  order: 10
