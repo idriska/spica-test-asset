@@ -1,0 +1,516 @@
+# BUCKET - Consultant
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-consultant-bucket
+spec:
+  title: Consultant
+  description: Consultant Bucket
+  icon: home_work
+  primary: mail
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Description of the Name input
+      options:
+        position: bottom
+    surname:
+      type: string
+      title: surname
+      description: Description of the surname input
+      options:
+        position: bottom
+    mail:
+      type: string
+      title: mail
+      description: Description of the mail input
+      options:
+        position: bottom
+    phone_number:
+      type: string
+      title: phone_number
+      description: Description of the phone_number input
+      options:
+        position: bottom
+    thumbnail:
+      type: storage
+      title: thumbnail
+      description: Description of the thumbnail input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 0
+---
+# BUCKET - Adverst
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-adverst-bucket
+spec:
+  title: Adverst
+  description: Adverst Bucket
+  icon: home_work
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    adverst_no:
+      type: number
+      title: adverst_no
+      description: adverst_no of adverst
+      options:
+        position: left
+    name:
+      type: string
+      title: name
+      description: Description of the name input
+      options:
+        position: left
+    description:
+      type: textarea
+      title: description
+      description: description of adverst
+      options:
+        position: right
+    square_meters:
+      type: string
+      title: square_meters
+      description: Description of the square_meters input
+      options:
+        position: left
+    room_count:
+      type: string
+      title: room_count
+      description: room_count of  adverst
+      options:
+        position: left
+    warming_type:
+      type: string
+      title: warming_type
+      description: warming_type of adverst
+      options:
+        position: right
+      enum:
+        - klima
+        - petek
+        - merkezi ısıtma
+        - yerden ısıtmalı
+    adverst_status:
+      type: string
+      title: adverst_status
+      description: adverst_status of adverst
+      options:
+        position: right
+      enum:
+        - kiralık
+        - satılık
+    livingroom_count:
+      type: string
+      title: livingroom_count
+      description: livingroom_count of adverst
+      options:
+        position: right
+    fuel_type:
+      type: string
+      title: fuel_type
+      description: fuel_type of adverst
+      options:
+        position: left
+      enum:
+        - kömür
+        - doğalgaz
+        - odun
+        - elektrik
+    staff_no:
+      type: string
+      title: staff_no
+      description: staff_no of adverst
+      options:
+        position: left
+    building_age:
+      type: string
+      title: building_age
+      description: building_age of adverst
+      options:
+        position: left
+    bathroom_count:
+      type: string
+      title: bathroom_count
+      description: bathroom_count of adverst
+      options:
+        position: left
+    trade:
+      type: boolean
+      title: trade
+      description: trade of adverst
+      options:
+        position: right
+      default: false
+    bedroom_count:
+      type: string
+      title: bedroom_count
+      description: bedroom_count of adverst
+      options:
+        position: right
+    area:
+      type: object
+      title: area
+      description: Description of the area input
+      options:
+        position: left
+      properties:
+        district:
+          type: string
+          title: district
+          description: Description of the district input
+          options:
+            position: bottom
+        borough:
+          type: string
+          title: borough
+          description: Description of the borough input
+          options:
+            position: bottom
+        city:
+          type: string
+          title: city
+          description: Description of the city input
+          options:
+            position: bottom
+    created_at:
+      type: date
+      title: created_at
+      description: created_at of adverst
+      options:
+        position: right
+      default: :created_at
+    consultant:
+      type: relation
+      title: consultant
+      description: Description of the consultant input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: mail
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-consultant-bucket
+    properties:
+      type: object
+      title: properties
+      description: Description of the properties input
+      options:
+        position: bottom
+      properties:
+        exterior:
+          type: multiselect
+          title: exterior
+          description: Description of the exterior input
+          options:
+            position: bottom
+          items:
+            type: string
+            enum:
+              - test
+        interior:
+          type: multiselect
+          title: interior
+          description: Description of the interior input
+          options:
+            position: bottom
+          items:
+            type: string
+            enum:
+              - test
+        environmental:
+          type: multiselect
+          title: environmental
+          description: Description of the environmental input
+          options:
+            position: bottom
+          items:
+            type: string
+            enum:
+              - test
+    emlak_category:
+      type: relation
+      title: emlak_category
+      description: Description of the emlak_category input
+      options:
+        position: bottom
+      relationType: onetoone
+      dependent: false
+      primary: name
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-category-bucket
+    headimage:
+      type: storage
+      title: headimage
+      description: Description of the headimage input
+      options:
+        position: bottom
+    images:
+      type: array
+      title: images
+      description: Description of the images input
+      options:
+        position: bottom
+      items:
+        title: Title of the items
+        type: storage
+    price:
+      type: string
+      title: price
+      description: Description of the price input
+      options:
+        position: left
+    price_type:
+      type: string
+      title: price_type
+      description: Description of the price_type input
+      options:
+        position: left
+      pattern: ""
+      enum:
+        - TL
+        - EURO
+        - STERLİNG
+        - DOLLAR
+  acl:
+    write: true==true
+    read: true==true
+  order: 1
+---
+# BUCKET - Usefull Link
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-usefull-link-bucket
+spec:
+  title: Usefull Link
+  description: Link Bucket
+  icon: home_work
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    link:
+      type: string
+      title: link
+      description: Description of the link input
+      options:
+        position: bottom
+    name:
+      type: string
+      title: name
+      description: name of link
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 2
+---
+# BUCKET - Branch
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-branch-bucket
+spec:
+  title: Branch
+  description: Branch Bucket
+  icon: home_work
+  primary: about_us
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: Description of the name input
+      options:
+        position: bottom
+    logo:
+      type: storage
+      title: logo
+      description: Description of the logo input
+      options:
+        position: bottom
+    open_address:
+      type: textarea
+      title: open_address
+      description: Description of the open_address input
+      options:
+        position: bottom
+    location:
+      type: location
+      title: location
+      description: Description of the location input
+      options:
+        position: bottom
+      locationType: Point
+    social:
+      type: object
+      title: social
+      description: Description of the social input
+      options:
+        position: bottom
+      properties:
+        instagram:
+          type: string
+          title: instagram
+          description: Description of the instagram input
+          options:
+            position: bottom
+        twitter:
+          type: string
+          title: twitter
+          description: Description of the twitter input
+          options:
+            position: bottom
+    contact:
+      type: object
+      title: contact
+      description: Description of the contact input
+      options:
+        position: bottom
+      properties:
+        mail:
+          type: string
+          title: mail
+          description: Description of the mail input
+          options:
+            position: bottom
+        phone_number:
+          type: string
+          title: phone_number
+          description: Description of the phone_number input
+          options:
+            position: bottom
+    working_hours:
+      type: array
+      title: working_hours
+      description: Description of the working_hours input
+      options:
+        position: bottom
+      items:
+        title: Title of the items
+        type: object
+        properties:
+          day_of_week:
+            type: number
+            title: day_of_week
+            description: Description of the day_of_week input
+            options:
+              position: bottom
+            maximum: 7
+            minimum: 1
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+              - 7
+          hour:
+            type: object
+            title: hour
+            description: Description of the hour input
+            options:
+              position: bottom
+            properties:
+              from:
+                type: string
+                title: from
+                description: Description of the from input
+                options:
+                  position: bottom
+              until:
+                type: string
+                title: until
+                description: Description of the until input
+                options:
+                  position: bottom
+    about_us:
+      type: textarea
+      title: about_us
+      description: Description of the about_us input
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 3
+---
+# BUCKET - Announcement
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-announcement-bucket
+spec:
+  title: Announcement
+  description: Announcement Bucket
+  icon: home_work
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    description:
+      type: textarea
+      title: description
+      description: Description of the row
+      options:
+        position: right
+    name:
+      type: string
+      title: name
+      description: name of announcement
+      options:
+        position: bottom
+  acl:
+    write: true==true
+    read: true==true
+  order: 4
+---
+# BUCKET - Category
+apiVersion: bucket/v1
+kind: Schema
+metadata:
+  name: spica-test-asset-category-bucket
+spec:
+  title: Category
+  description: Category Bucket
+  icon: home_work
+  primary: name
+  readOnly: false
+  history: false
+  properties:
+    name:
+      type: string
+      title: name
+      description: name of category
+      options:
+        position: bottom
+    sub_categories:
+      type: relation
+      title: sub_categories
+      description: Description of the sub_categories input
+      options:
+        position: bottom
+      relationType: onetomany
+      dependent: false
+      bucket:
+        resourceFieldRef:
+          schemaName: spica-test-asset-category-bucket
+  acl:
+    write: true==true
+    read: true==true
+  order: 5
